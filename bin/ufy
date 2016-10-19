@@ -1,0 +1,22 @@
+#!/bin/bash
+# minimal LuaTeX installation
+LUATEX_DIR=$HOME/.ufy/luatexminimal
+
+echo "Writing pre-init template"
+# Write pre_init template
+cat > .ufy_pre_init.lua <<EOF
+ufy = require("ufy")
+EOF
+
+TEX_TEMPLATE=`basename $1 .lua`.tex
+
+echo "Writing TeX template $TEX_TEMPLATE"
+# Write tex template
+cat > $TEX_TEMPLATE <<EOF
+\directlua{ufy.init()}
+\directlua{dofile("$1")}
+\bye
+EOF
+
+echo "Invoking LuaTeX"
+$LUATEX_DIR/luatex --fmt=ufy --lua=.ufy_pre_init.lua --output-format=pdf $TEX_TEMPLATE
