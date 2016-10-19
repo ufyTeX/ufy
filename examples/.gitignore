@@ -1,0 +1,4 @@
+*.log
+*.tex
+*.pdf
+.ufy_pre_init.lua
