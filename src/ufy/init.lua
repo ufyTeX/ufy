@@ -16,7 +16,7 @@ local make_loader = function(path, pos, loadfunc)
         return ret
       end
     end
-    local loader,err = loadfunc(file)
+    local loader,err = loadfunc(file, name)
     if not loader then
       return "\n\t[lualoader] Loading error:\n\t"..err
     end
@@ -25,9 +25,8 @@ local make_loader = function(path, pos, loadfunc)
   package.searchers[pos] = loader
 end
 
-local binary_loader = function(file)
-  local base = file:match("/([^%.]+)%.[%w]+$")
-  local symbol = base:gsub("/","_")
+local binary_loader = function(file, name)
+  local symbol = name:gsub("%.","_")
   return package.loadlib(file, "luaopen_"..symbol)
 end
 
