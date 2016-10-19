@@ -55,10 +55,12 @@ tex.pageheight = "297mm"
 tex.hsize = "210mm"
 
 -- Set the paragraph indentation
-tex.parindent = "50pt"
+tex.parindent = "20pt"
 
 -- Convert text to nodes
-local text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+local f = io.open("lorem.txt", "rb")
+local text = f:read("*all")
+f:close()
 local head = text_to_paragraph(text)
 
 -- Break the paragraph into vertically stacked boxes
