@@ -31,11 +31,11 @@ local binary_loader = function(file)
   return package.loadlib(file, "luaopen_"..symbol)
 end
 
--- Revert the package searchers to use .
+-- Revert the package searchers to use package.path and package.cpath.
 --
 -- Package searching logic is overridden by default in LuaTeX to use kpse.
 -- Calling this function reverts the searchers to use package.path and
--- package.cpath.
+-- package.cpath first, failing which it will try the kpse based searcher.
 --
 -- Package Loading References:
 -- 1. http://www.lua.org/manual/5.2/manual.html#pdf-package.searchers
