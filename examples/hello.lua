@@ -16,7 +16,7 @@ local function text_to_paragraph(text)
   last.next = indent
   last = indent
 
-  for p,v in utf8.codes(text) do
+  for _,v in utf8.codes(text) do
     local n
     if v == 32 then -- FIXME use Unicode properties to identify whitespace
       n = node.new("glue",13)
