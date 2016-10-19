@@ -27,7 +27,7 @@ end
 
 local binary_loader = function(file)
   local base = file:match("/([^%.]+)%.[%w]+$")
-  local symbol = base:gsub("%.","_")
+  local symbol = base:gsub("/","_")
   return package.loadlib(file, "luaopen_"..symbol)
 end
 
