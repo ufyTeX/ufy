@@ -2,7 +2,7 @@
 
 _WARNING: This is pre-release code, and very much a work in progress._
 
-_ufy_ is an API and program to typeset PDF documents using Lua code. It is built on top of [LuaTeX](http://www.luatex.org/), and uses the Lua interpreter embedded in it.
+_ufy_ is an API and program to typeset PDF documents using Lua code. It is built on top of [LuaTeX](http://www.luatex.org/), and uses the Lua interpreter embedded in it to execute Lua code.
 
 ## Running
 
