@@ -24,7 +24,7 @@ git clone https://github.com/deepakjois/luatexminimal $HOME/.ufy/luatexminimal
 Download the [LuaTeX binary](http://www.luatex.org/download.html) for your OS and copy it so `$HOME/.ufy/luatexminimal`:
 
 ```
-wget -O http://minimals.contextgarden.net/current/bin/luatex/osx-intel/bin/luatex
+wget -O $HOME/.ufy/luatexminimal/luatex http://minimals.contextgarden.net/current/bin/luatex/osx-intel/bin/luatex
 chmod +x $HOME/.ufy/luatexminimal/luatex
 ```
 
