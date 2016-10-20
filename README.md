@@ -1,6 +1,6 @@
 # ufy
 
-_WARNING: This is pre-release code, and very much a work in progress. Lots of functionality is missing and existing functions may have serious bugs._
+_WARNING: This is pre-release code, and very much a work in progress. Lots of functionality is missing and existing functionality may have serious bugs._
 
 _ufy_ is an API and program to typeset PDF documents using Lua code, built on top of [LuaTeX](http://www.luatex.org/).
 
