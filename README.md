@@ -4,13 +4,13 @@ _WARNING: This is pre-release code, and very much a work in progress. Lots of fu
 
 _ufy_ is an API and program to typeset PDF documents using Lua code and the [LuaTeX](http://www.luatex.org/) typesetting engine.
 
-The _ufy_ API is built on top of the API that LuaTeX exposes (refer to the [LuaTeX user manual][manual]). The _ufy_ program uses the Lua interpreter embedded in LuaTeX to execute Lua code, but at the same time allows you to use any Lua modules on your system. You can use LuaRocks modules or other Lua modules you choose to expose using LUA_PATH.
+The _ufy_ API is built on top of the API that LuaTeX exposes (refer to the [LuaTeX user manual][manual]). The _ufy_ program uses the Lua interpreter embedded in LuaTeX to execute Lua code, but at the same time allows use of any Lua modules on the system – LuaRocks modules or other Lua modules exposed using LUA_PATH ca.
 
 [manual]:http://www.luatex.org/svn/trunk/manual/luatex.pdf
 
 ## Running
 
-These are instructions to fetch and run ufy, while it is still under heavy development. Things will be automated and cleaned up closer to release.
+These are instructions to fetch and run ufy, while it is still under heavy development. Things will be automated and cleaned up closer to release. See https://github.com/deepakjois/ufy/issues/1
 
 Install [luatexminimal], which is a minimal environment to run LuaTeX.
 
