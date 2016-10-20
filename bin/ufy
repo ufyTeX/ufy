@@ -9,4 +9,4 @@ ufy = require("ufy")
 EOF
 
 echo "Invoking LuaTeX"
-$LUATEX_DIR/luatex --fmt=ufy --lua=.ufy_pre_init.lua -jobname=`basename $1 .lua` '\directlua{ufy.init()}' "\directlua{dofile('$1')}" '\bye'
+$LUATEX_DIR/luatex --lua=.ufy_pre_init.lua \&ufy $1
