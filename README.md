@@ -10,19 +10,21 @@ These are instructions to fetch and run ufy, while it is still under heavy devel
 
 Install [luatexminimal], which is a minimal environment to run LuaTeX.
 
+[luatexminimal]:https://github.com/deepakjois/luatexminimal
+
 ```
 mkdir $HOME/.ufy
 git clone https://github.com/deepakjois/luatexminimal $HOME/.ufy/luatexminimal
 ```
 
-Download the [LuaTeX binary](http://www.luatex.org/download.html) for your system and copy it so `$HOME/.ufy/luatexminimal`:
+Download the [LuaTeX binary](http://www.luatex.org/download.html) for your OS and copy it so `$HOME/.ufy/luatexminimal`:
 
 ```
 wget -O http://minimals.contextgarden.net/current/bin/luatex/osx-intel/bin/luatex
 chmod +x $HOME/.ufy/luatexminimal/luatex
 ```
 
-Now you are ready to checkout and run ufy:
+Now you are ready to checkout and run _ufy_:
 
 ```
 git clone https://github.com/deepakjois/ufy
