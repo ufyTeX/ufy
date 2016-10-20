@@ -3,10 +3,10 @@
 LUATEX_DIR=$HOME/.ufy/luatexminimal
 
 echo "Writing pre-init template"
-# Write pre_init template
+# Write pre_init template.
 cat > .ufy_pre_init.lua <<EOF
 ufy = require("ufy")
 EOF
 
 echo "Invoking LuaTeX"
-$LUATEX_DIR/luatex --fmt=ufy --lua=.ufy_pre_init.lua --output-format=pdf -jobname=`basename $1 .lua` '\directlua{ufy.init()}' "\directlua{dofile('$1')}" '\bye'
+$LUATEX_DIR/luatex --fmt=ufy --lua=.ufy_pre_init.lua -jobname=`basename $1 .lua` '\directlua{ufy.init()}' "\directlua{dofile('$1')}" '\bye'

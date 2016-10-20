@@ -48,6 +48,7 @@ end
 function ufy.init()
   tex.enableprimitives('',tex.extraprimitives())
   ufy.switch_package_searchers()
+  tex.outputmode = 1
   pdf.setpkresolution(600)
   pdf.setminorversion(5)
 end
