@@ -35,7 +35,7 @@ git clone https://github.com/deepakjois/ufy
 cd ufy
 luarocks install --only-deps ufy-scm-1.rockspec
 eval $(luarocks path)
-export LUA_PATH=`pwd/src/?/init.lua;$LUA_PATH`
+export LUA_PATH=`pwd`/src/?/init.lua;$LUA_PATH
 ```
 
 Run an example file to check if generates the PDF:
