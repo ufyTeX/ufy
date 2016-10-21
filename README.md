@@ -52,6 +52,8 @@ chmod +x $HOME/.ufy/luatex
 
 ### Checkout and run ufy
 
+After checking out the source, we install the dependencies from LuaRocks. Since ufy is not in LuaRocks yet, we set a custom LUA_PATH to point to our source directory. This will not be needed later.
+
 ```
 git clone https://github.com/deepakjois/ufy
 cd ufy
