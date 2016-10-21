@@ -41,7 +41,7 @@ function ufy.run(args)
   local luatex_program = os.getenv('HOME') .. "/.ufy/luatex"
 
   -- Check if LuaTeX binary exists
-  print("Checking is luatex is present…")
+  print("Checking if luatex is present…")
   if not file_exists(luatex_program) then
     print("Cannot find LuaTeX binary at " .. luatex_program)
     print("Run ufy --install-luatex to download and install LuaTeX for your platform.")
