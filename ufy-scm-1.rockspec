@@ -23,5 +23,6 @@ build = {
      bin = {
        ['ufy'] = 'bin/ufy'
      }
-   }
+   },
+   copy_directories = { "config" }
 }
