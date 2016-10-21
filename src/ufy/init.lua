@@ -117,6 +117,7 @@ function ufy.init()
   tex.outputmode = 1
   pdf.setpkresolution(600)
   pdf.setminorversion(5)
+  pdf.mapline("cmr10 CMR10 <cmr10.pfb")
 end
 
 
