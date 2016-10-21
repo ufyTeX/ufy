@@ -1,7 +1,4 @@
-#!/bin/bash
-# Location of standalone LuaTeX binary in a regular
-# installation of ufy.
-LUATEX_DIR=$HOME/.ufy/
-
-echo "Invoking LuaTeX"
-$LUATEX_DIR/luatex --lua=$HOME/.ufy/ufy-config/ufy_pre_init.lua \&ufy $1
+#!/usr/bin/env lua
+local ufy = require("ufy")
+ufy.run(arg)
+-- $LUATEX_DIR/luatex --lua=$HOME/.ufy/ufy-config/ufy_pre_init.lua \&ufy $1

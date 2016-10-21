@@ -12,7 +12,8 @@ dependencies = {
   "lua >= 5.2",
   "luaharfbuzz >= 0.0.4",
   "luabidi >= 0.0.2",
-  "compat53 >= 0.0.3"
+  "compat53 >= 0.0.3",
+  "datafile >=0.2"
 }
 build = {
    type = "builtin",

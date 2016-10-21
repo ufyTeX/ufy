@@ -1,7 +1,71 @@
 local utf8 = require("compat53.utf8")
 local ufy = {}
 
-local ufy_config_dir = string.format("%s/.ufy/ufy-config", os.getenv("HOME"))
+
+local ufy_config_dir
+
+-- Locate ufy’s config directory
+function ufy.locate_config()
+  local datafile = require("datafile")
+  local luarocks_opener = require("datafile.openers.luarocks").opener
+  local unix_config_opener = require("datafile.openers.unix").opener
+  -- Try LuaRocks opener
+  datafile.openers = { luarocks_opener }
+  local f
+  f, ufy_config_dir = datafile.open("config", "r")
+
+  if f == nil then
+    print("WARNING could not locate ufy’s config folder in LuaRocks tree.")
+    print("Looking in $HOME/.ufy")
+    -- Try Unix opener
+    datafile.openers = { unix_config_opener}
+    ufy_config_dir = datafile.path("ufy/config", "r", "config")
+    if ufy_config_dir == nil then
+      print("Could not locate config. Aborting…")
+      os.exit(1)
+    end
+  end
+end
+
+local function file_exists(name)
+   local f=io.open(name,"r")
+   if f~=nil then io.close(f) return true else return false end
+end
+
+-- Run the ufy program.
+--
+-- Setup and invokes the LuaTeX interpreter with a Lua file.
+function ufy.run(args)
+  -- Location of standalone LuaTeX binary in a regular
+  -- installation of ufy.
+  local luatex_program = os.getenv('HOME') .. "/.ufy/luatex"
+
+  -- Check if LuaTeX binary exists
+  print("Checking is luatex is present…")
+  if not file_exists(luatex_program) then
+    print("Cannot find LuaTeX binary at " .. luatex_program)
+    print("Run ufy --install-luatex to download and install LuaTeX for your platform.")
+    os.exit(1)
+  end
+
+  ufy.locate_config()
+
+  -- Locate pre-init file
+  local pre_init_file = ufy_config_dir .. "/ufy_pre_init.lua"
+
+  local command_args = {
+    luatex_program,             -- LuaTeX binary
+    "--shell-escape",           -- Allows io.popen in Lua init script: see http://tug.org/pipermail/luatex/2016-October/006249.html
+    "--lua=" .. pre_init_file,  -- Pre-init file
+    "\\&ufy",                   -- format file
+    args[1]
+  }
+
+  local command = table.concat(command_args, " ")
+  print(command)
+  local _, _, code = os.execute(command)
+  os.exit(code)
+end
 
 -- Copied from: http://tex.stackexchange.com/questions/218855/using-lualatex-and-sqlite3/219228#219228
 local function make_loader(path, pos, loadfunc)
@@ -111,7 +175,7 @@ local function find_font_file(name)
   local path, file = string.match(name,"^(.-)[\\/]?([^\\/]*)$")
   if path == "" then -- if no path specified, then append the config directory path
     -- FIXME check if file exists in curent directory first
-    local n, ext =  string.match(file, "([^%.]*)%.?(.*)")
+    local _, ext =  string.match(file, "([^%.]*)%.?(.*)")
     if ext == "" then name = name .. ".tfm" end -- FIXME ugly hack. Only useful during format generation
     return string.format("%s/fonts/%s", ufy_config_dir, name)
   end
@@ -127,6 +191,7 @@ end
 -- callbacks have been stubbed out, and some others throw an error because
 -- there is no reason for them to be called during normal operation.
 function ufy.add_file_discovery_callbacks()
+  ufy.locate_config()
   callback.register('open_read_file',reader)
   callback.register('find_output_file',  return_asked_name)
   callback.register('find_write_file', return_asked_name_id)
