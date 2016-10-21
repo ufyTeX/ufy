@@ -52,21 +52,27 @@ chmod +x $HOME/.ufy/luatex
 
 ### Checkout and run ufy
 
-After checking out the source, we install the dependencies from LuaRocks. Since ufy is not in LuaRocks yet, we set a custom LUA_PATH to point to our source directory. This will not be needed later.
+We install ufy and its dependencies in a local Luarocks tree to keep things clean.
 
 ```
 git clone https://github.com/deepakjois/ufy
 cd ufy
-luarocks install --only-deps ufy-scm-1.rockspec
-eval $(luarocks path)
-export LUA_PATH=`pwd`/src/?/init.lua;$LUA_PATH
+luarocks --local make
+eval $(luarocks path --bin)
 ```
 
 Run an example file to check if it generates the PDF:
 
 ```
-cd examples
-../bin/ufy hello.lua
+$ cd examples
+
+$ ufy hello.lua
+Invoking LuaTeX
+This is LuaTeX, Version 1.0.0 (TeX Live 2017/dev)
+(hello.lua [1{/Users/deepak/.ufy/ufy-config/fonts/pdftex.map}])</Users/deepak/.
+ufy/ufy-config/fonts/cmr10.pfb>
+Output written on hello.pdf (1 page, 17251 bytes).
+Transcript written on hello.log.
 ```
 
 This should generate a PDF file `hello.pdf` in the same folder.
