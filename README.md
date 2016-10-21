@@ -36,12 +36,6 @@ node.write(vbox)
 
 These are instructions to fetch and run ufy, while it is still under heavy development. Things will be automated and cleaned up closer to release. See https://github.com/deepakjois/ufy/issues/1
 
-### Setup a minimal ufy configuaration
-```
-mkdir $HOME/.ufy
-git clone https://github.com/deepakjois/ufy-config $HOME/.ufy/ufy-config
-```
-
 ### Download standalone LuaTeX binary
 Download the [LuaTeX binary](http://www.luatex.org/download.html) for your platform and copy it so `$HOME/.ufy/`:
 
@@ -67,10 +61,13 @@ Run an example file to check if it generates the PDF:
 $ cd examples
 
 $ ufy hello.lua
-Invoking LuaTeX
+Checking if luatex is present…
+/Users/deepak/.ufy/luatex --shell-escape --lua=/Users/deepak/.luarocks/lib/luarocks/rocks/ufy/scm-1/config/ufy_pre_init.lua \&ufy hello.lua
 This is LuaTeX, Version 1.0.0 (TeX Live 2017/dev)
-(hello.lua [1{/Users/deepak/.ufy/ufy-config/fonts/pdftex.map}])</Users/deepak/.
-ufy/ufy-config/fonts/cmr10.pfb>
+ system commands enabled.
+(hello.lua [1{/Users/deepak/.luarocks/lib/luarocks/rocks/ufy/scm-1/config/fonts
+/pdftex.map}])</Users/deepak/.luarocks/lib/luarocks/rocks/ufy/scm-1/config/font
+s/cmr10.pfb>
 Output written on hello.pdf (1 page, 17251 bytes).
 Transcript written on hello.log.
 ```
