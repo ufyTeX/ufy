@@ -1,8 +1,10 @@
 local utf8 = require("compat53.utf8")
 local ufy = {}
 
+local ufy_config_dir = string.format("%s/.ufy/ufy-config", os.getenv("HOME"))
+
 -- Copied from: http://tex.stackexchange.com/questions/218855/using-lualatex-and-sqlite3/219228#219228
-local make_loader = function(path, pos, loadfunc)
+local function make_loader(path, pos, loadfunc)
   local default_loader = package.searchers[pos]
   local loader = function(name)
     local file, _ = package.searchpath(name,path)
@@ -26,7 +28,7 @@ local make_loader = function(path, pos, loadfunc)
   package.searchers[pos] = loader
 end
 
-local binary_loader = function(file, name)
+local function binary_loader(file, name)
   local symbol = name:gsub("%.","_")
   return package.loadlib(file, "luaopen_"..symbol)
 end
@@ -53,6 +55,106 @@ function ufy.init()
   pdf.setminorversion(5)
 end
 
+
+local function reader( asked_name )
+  -- print("reader: "..asked_name)
+  local tab = { }
+  tab.file = io.open(asked_name,"rb")
+  tab.reader = function (t)
+                  local f = t.file
+                  return f:read('*l')
+               end
+  tab.close = function (t)
+                  t.file:close()
+              end
+  return tab
+end
+
+local function read_file( name )
+  -- print("read_file: "..name)
+  local f, err = io.open(name,"rb")
+  if f == nil then error(err) end
+  local buf = f:read("*all")
+  f:close()
+  return true,buf,buf:len()
+end
+
+local function return_asked_name( asked_name )
+  -- print("in return_asked_name: "..asked_name)
+  return asked_name
+end
+
+local function return_asked_name_id(_, asked_name)
+  -- print("in return_asked_name_id: "..asked_name)
+  return asked_name
+end
+
+local function error_xxx_file(name)
+  print("error_xxx_file: "..name)
+  print("ERROR: should not get here.")
+  return nil
+end
+
+local function find_format_file(name)
+  -- print("in find_format_file")
+  return string.format("%s/%s", ufy_config_dir, name)
+end
+
+local function find_map_file(name)
+  -- print("find_map_file: "..name)
+  return string.format("%s/fonts/%s", ufy_config_dir, name)
+end
+
+local function find_font_file(name)
+  -- print("find_font_file: "..name)
+  local path, file = string.match(name,"^(.-)[\\/]?([^\\/]*)$")
+  if path == "" then -- if no path specified, then append the config directory path
+    -- FIXME check if file exists in curent directory first
+    local n, ext =  string.match(file, "([^%.]*)%.?(.*)")
+    if ext == "" then name = name .. ".tfm" end -- FIXME ugly hack. Only useful during format generation
+    return string.format("%s/fonts/%s", ufy_config_dir, name)
+  end
+  return name
+end
+
+-- Add file discovery callbacks that LuaTeX requires when kpse
+-- is not initialized
+--
+-- ufy starts up by setting texconfig.kpse_init to false, which means
+-- we need to implement the file discovery callbacks ourselves. However,
+-- ufy does not need to implement all the file discovery callbacks. Some
+-- callbacks have been stubbed out, and some others throw an error because
+-- there is no reason for them to be called during normal operation.
+function ufy.add_file_discovery_callbacks()
+  callback.register('open_read_file',reader)
+  callback.register('find_output_file',  return_asked_name)
+  callback.register('find_write_file', return_asked_name_id)
+  callback.register('find_read_file', return_asked_name_id)
+
+  callback.register('find_format_file', find_format_file)
+
+  callback.register('find_map_file', find_map_file)
+  callback.register('read_map_file', read_file)
+  callback.register('find_font_file', find_font_file)
+  callback.register('read_font_file', read_file)
+
+  callback.register('find_opentype_file',find_font_file)
+  callback.register('find_type1_file',   find_font_file)
+  callback.register('find_truetype_file',find_font_file)
+
+  callback.register('read_opentype_file',read_file)
+  callback.register('read_type1_file',   read_file)
+  callback.register('read_truetype_file',read_file)
+
+  for _,t in ipairs({'find_vf_file','find_enc_file','find_sfd_file','find_pk_file','find_data_file','find_image_file'}) do
+    callback.register(t,error_xxx_file)
+  end
+
+  for _,t in ipairs({'read_vf_file','read_sdf_file','read_pk_file','read_data_file'}) do
+    callback.register(t, error_xxx_file )
+  end
+end
+
 -- build paragraph node
 -- adapted from: http://tex.stackexchange.com/questions/114568/can-i-create-a-node-list-from-some-text-entirely-within-lua
 function ufy.text_to_paragraph(text)
@@ -69,7 +171,7 @@ function ufy.text_to_paragraph(text)
   last.next = indent
   last = indent
 
-  for p,v in utf8.codes(text) do
+  for _,v in utf8.codes(text) do
     local n
     if v < 32 then
       goto skipchar

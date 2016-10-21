@@ -1,12 +1,7 @@
 #!/bin/bash
-# minimal LuaTeX installation
-LUATEX_DIR=$HOME/.ufy/luatexminimal
-
-echo "Writing pre-init template"
-# Write pre_init template.
-cat > .ufy_pre_init.lua <<EOF
-ufy = require("ufy")
-EOF
+# Location of standalone LuaTeX binary in a regular
+# installation of ufy.
+LUATEX_DIR=$HOME/.ufy/
 
 echo "Invoking LuaTeX"
-$LUATEX_DIR/luatex --lua=.ufy_pre_init.lua \&ufy $1
+$LUATEX_DIR/luatex --lua=$HOME/.ufy/ufy-config/ufy_pre_init.lua \&ufy $1

@@ -2,5 +2,5 @@
 *.tex
 *.pdf
 .ufy_pre_init.lua
-debug.lua
+debug*.lua
 debug.txt

@@ -1,0 +1,15 @@
+This is LuaTeX, Version 1.0.0 (TeX Live 2017/dev)  (INITEX)  21 OCT 2016 12:48
+**ufy.tex
+(ufy.tex/Users/deepak/code/personal/ufy/src/ufy/init.lua:65: attempt to index lo
+cal 'f' (a nil value).
+l.1 
+  
+? 
+! Emergency stop.
+l.1 
+  
+End of file on the terminal!
+
+!  ==> Fatal error occurred, bad output DVI file produced!
+No pages of output.
+

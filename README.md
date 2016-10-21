@@ -8,7 +8,7 @@ The _ufy_ API is built on top of the API that LuaTeX exposes (refer to the [LuaT
 
 [manual]:http://www.luatex.org/svn/trunk/manual/luatex.pdf
 
-Here is a really simple and crude example typesetting a document with _ufy_:
+Here is a really simple and crude example of typesetting a document with _ufy_:
 
 ```lua
 -- Page settings
@@ -36,23 +36,21 @@ node.write(vbox)
 
 These are instructions to fetch and run ufy, while it is still under heavy development. Things will be automated and cleaned up closer to release. See https://github.com/deepakjois/ufy/issues/1
 
-Install [luatexminimal], which is a minimal environment to run LuaTeX.
-
-[luatexminimal]:https://github.com/deepakjois/luatexminimal
-
+### Setup a minimal ufy configuaration
 ```
 mkdir $HOME/.ufy
-git clone https://github.com/deepakjois/luatexminimal $HOME/.ufy/luatexminimal
+git clone https://github.com/deepakjois/ufy-config $HOME/.ufy/ufy-config
 ```
 
-Download the [LuaTeX binary](http://www.luatex.org/download.html) for your OS and copy it so `$HOME/.ufy/luatexminimal`:
+### Download standalone LuaTeX binary
+Download the [LuaTeX binary](http://www.luatex.org/download.html) for your platform and copy it so `$HOME/.ufy/`:
 
 ```
-wget -O $HOME/.ufy/luatexminimal/luatex http://minimals.contextgarden.net/current/bin/luatex/osx-intel/bin/luatex
-chmod +x $HOME/.ufy/luatexminimal/luatex
+wget -O $HOME/.ufy/luatex http://minimals.contextgarden.net/current/bin/luatex/osx-intel/bin/luatex
+chmod +x $HOME/.ufy/luatex
 ```
 
-Now you are ready to checkout and run _ufy_:
+### Checkout and run ufy
 
 ```
 git clone https://github.com/deepakjois/ufy
@@ -62,7 +60,8 @@ eval $(luarocks path)
 export LUA_PATH=`pwd`/src/?/init.lua;$LUA_PATH
 ```
 
-Run an example file to check if generates the PDF:
+Run an example file to check if it generates the PDF:
+
 ```
 cd examples
 ../bin/ufy hello.lua
