@@ -8,6 +8,7 @@ files["."].globals = {
   "pdf",
   "tex",
   "texio",
+  "texconfig",
   "ufy"
 }
 
