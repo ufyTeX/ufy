@@ -13,7 +13,7 @@ dependencies = {
   "luaharfbuzz >= 0.0.4",
   "luabidi >= 0.0.2",
   "compat53 >= 0.0.3",
-  "datafile >=0.2"
+  "datafile >=0.3"
 }
 build = {
    type = "builtin",

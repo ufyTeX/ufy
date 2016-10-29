@@ -7,14 +7,13 @@ local ufy_config_dir
 -- Locate ufy’s config directory
 function ufy.locate_config()
   local datafile = require("datafile")
-  local luarocks_opener = require("datafile.openers.luarocks").opener
-  local unix_config_opener = require("datafile.openers.unix").opener
+  local luarocks_opener = require("datafile.openers.luarocks")
+  local unix_config_opener = require("datafile.openers.unix")
   -- Try LuaRocks opener
   datafile.openers = { luarocks_opener }
-  local f
-  f, ufy_config_dir = datafile.open("config", "r")
+  ufy_config_dir = datafile.path("config")
 
-  if f == nil then
+  if ufy_config_dir == nil then
     print("WARNING could not locate ufy’s config folder in LuaRocks tree.")
     print("Looking in $HOME/.ufy")
     -- Try Unix opener
