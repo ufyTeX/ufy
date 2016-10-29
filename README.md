@@ -44,6 +44,19 @@ wget -O $HOME/.ufy/luatex http://minimals.contextgarden.net/current/bin/luatex/o
 chmod +x $HOME/.ufy/luatex
 ```
 
+### Install Harfbuzz
+[Harfbuzz](https://www.freedesktop.org/wiki/Software/HarfBuzz/) is a required external dependency to run ufy. This is because the ufy LuaRocks package depends on [luaharfbuzz], which needs Harfbuzz installed on the system to work.
+
+[luaharfbuzz]: https://github.com/deepakjois/luaharfbuzz
+
+On OS X, you can install harfbuzz as follows:
+
+```
+brew install harfbuzz
+```
+
+Please search for instructions on your own platform and make sure Harfbuzz is installed before proceeding further.
+
 ### Checkout and run ufy
 
 We install ufy and its dependencies in a local Luarocks tree to keep things clean.
