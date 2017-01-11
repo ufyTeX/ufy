@@ -10,10 +10,11 @@ description = {
 }
 dependencies = {
   "lua >= 5.2",
-  "luaharfbuzz >= 0.0.4",
+  "luaharfbuzz >= 0.0.7",
   "luabidi >= 0.0.2",
   "compat53 >= 0.0.3",
-  "datafile >=0.3"
+  "datafile >=0.3",
+  "lua-path >= 0.3.0"
 }
 build = {
    type = "builtin",
