@@ -1,6 +1,7 @@
 local utf8 = require("compat53.utf8")
-local ufy = {}
 
+local ufy = {}
+ufy.fonts = require("ufy.fonts")
 
 local ufy_config_dir
 
@@ -116,7 +117,10 @@ function ufy.init()
   tex.outputmode = 1
   pdf.setpkresolution(600)
   pdf.setminorversion(5)
-  pdf.mapline("cmr10 CMR10 <cmr10.pfb")
+  pdf.mapfile(nil)
+  pdf.mapline('')
+  local fontid = ufy.fonts.load_font(string.format("%s/fonts/%s", ufy_config_dir, "Merriweather-Light.ttf"), 10)
+  font.current(fontid)
 end
 
 
@@ -172,14 +176,11 @@ end
 
 local function find_font_file(name)
   -- print("find_font_file: "..name)
-  local path, file = string.match(name,"^(.-)[\\/]?([^\\/]*)$")
-  if path == "" then -- if no path specified, then append the config directory path
-    -- FIXME check if file exists in curent directory first
-    local _, ext =  string.match(file, "([^%.]*)%.?(.*)")
-    if ext == "" then name = name .. ".tfm" end -- FIXME ugly hack. Only useful during format generation
+  if file_exists(name) then
+    return name
+  else
     return string.format("%s/fonts/%s", ufy_config_dir, name)
   end
-  return name
 end
 
 -- Add file discovery callbacks that LuaTeX requires when kpse

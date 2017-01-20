@@ -299,8 +299,6 @@
 \newcount\interdisplaylinepenalty \interdisplaylinepenalty=100
 \newcount\interfootnotelinepenalty \interfootnotelinepenalty=100
 
-% Definitions for preloaded fonts
-
 \def\magstephalf{1095 }
 \def\magstep#1{\ifcase#1 \@m\or 1200\or 1440\or 1728\or 2074\or 2488\fi\relax}
 
@@ -308,11 +306,6 @@
 % but they are preloaded so that other format packages can use them.
 % For example, if another set of macros says "\font\ninerm=cmr9",
 % TeX will not have to reload the font metric information for cmr9.
-
-\message{fonts,}
-
-\font\tenrm=cmr10 % roman text
-\def\rm{\fam\z@\tenrm}
 
 % Macros for setting ordinary text
 \message{macros,}
@@ -582,7 +575,7 @@
 \def\showhyphens#1{\setbox0\vbox{\parfillskip\z@skip\hsize\maxdimen\tenrm
   \pretolerance\m@ne\tolerance\m@ne\hbadness0\showboxdepth0\ #1}}
 
-\normalbaselines\rm % select roman font
+\normalbaselines
 \nonfrenchspacing % punctuation affects the spacing
 \catcode`@=12 % at signs are no longer letters
 
