@@ -1,6 +1,7 @@
 local utf8 = require("compat53.utf8")
-local ufy = {}
 
+local ufy = {}
+ufy.fonts = require("ufy.fonts")
 
 local ufy_config_dir
 
@@ -117,6 +118,8 @@ function ufy.init()
   pdf.setpkresolution(600)
   pdf.setminorversion(5)
   pdf.mapline("cmr10 CMR10 <cmr10.pfb")
+  local fontid = ufy.fonts.load_font(string.format("%s/fonts/%s", ufy_config_dir, "Merriweather-Regular.ttf"), 10)
+  font.current(fontid)
 end
 
 

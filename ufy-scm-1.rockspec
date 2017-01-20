@@ -19,7 +19,8 @@ dependencies = {
 build = {
    type = "builtin",
    modules = {
-     ufy = "src/ufy/init.lua"
+     ufy = "src/ufy/init.lua",
+     ['ufy.fonts'] = 'src/ufy/fonts.lua'
    },
    install = {
      bin = {
