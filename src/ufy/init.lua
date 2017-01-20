@@ -38,7 +38,7 @@ end
 function ufy.run(args)
   -- Location of standalone LuaTeX binary in a regular
   -- installation of ufy.
-  local luatex_program = os.getenv('HOME') .. "/.ufy/luatex"
+  local luatex_program = path.join(path.user_home(), ".ufy", "luatex")
 
   -- Check if LuaTeX binary exists
   print("Checking if luatex is present…")
@@ -169,12 +169,12 @@ end
 
 local function find_format_file(name)
   -- print("in find_format_file")
-  return string.format("%s/%s", ufy.config_dir(), name)
+  return path.join(ufy.config_dir(), name)
 end
 
 local function find_map_file(name)
   -- print("find_map_file: "..name)
-  return string.format("%s/fonts/%s", ufy.config_dir(), name)
+  return path.join(ufy.config_dir(), name)
 end
 
 local function find_font_file(name)
@@ -182,7 +182,7 @@ local function find_font_file(name)
   if file_exists(name) then
     return name
   else
-    return string.format("%s/fonts/%s", ufy.config_dir(), name)
+    return path.join(ufy.config_dir(), "fonts", name)
   end
 end
 
