@@ -10,26 +10,20 @@ local ufy_config_dir
 function ufy.locate_config()
   local datafile = require("datafile")
   local luarocks_opener = require("datafile.openers.luarocks")
-  local unix_config_opener = require("datafile.openers.unix")
+
   -- Try LuaRocks opener
   datafile.openers = { luarocks_opener }
   ufy_config_dir = datafile.path("config")
 
   if ufy_config_dir == nil then
-    print("WARNING could not locate ufy’s config folder in LuaRocks tree.")
-    print("Looking in $HOME/.ufy")
-    -- Try Unix opener
-    datafile.openers = { unix_config_opener}
-    ufy_config_dir = datafile.path("ufy/config", "r", "config")
-    if ufy_config_dir == nil then
-      print("Could not locate config. Aborting…")
-      os.exit(1)
-    end
+    print("Could not locate config. Aborting…")
+    os.exit(1)
   end
 end
 
 -- Return ufy’s config directory
 function ufy.config_dir()
+  if ufy_config_dir == nil then ufy.locate_config() end
   return ufy_config_dir
 end
 
@@ -54,10 +48,8 @@ function ufy.run(args)
     os.exit(1)
   end
 
-  ufy.locate_config()
-
   -- Locate pre-init file
-  local pre_init_file = ufy_config_dir .. "/ufy_pre_init.lua"
+  local pre_init_file = ufy.config_dir() .. "/ufy_pre_init.lua"
 
   -- Extract basename without extension for jobname
   local jobname, _ = path.splitext(path.basename(args[1]))
@@ -177,12 +169,12 @@ end
 
 local function find_format_file(name)
   -- print("in find_format_file")
-  return string.format("%s/%s", ufy_config_dir, name)
+  return string.format("%s/%s", ufy.config_dir(), name)
 end
 
 local function find_map_file(name)
   -- print("find_map_file: "..name)
-  return string.format("%s/fonts/%s", ufy_config_dir, name)
+  return string.format("%s/fonts/%s", ufy.config_dir(), name)
 end
 
 local function find_font_file(name)
@@ -190,7 +182,7 @@ local function find_font_file(name)
   if file_exists(name) then
     return name
   else
-    return string.format("%s/fonts/%s", ufy_config_dir, name)
+    return string.format("%s/fonts/%s", ufy.config_dir(), name)
   end
 end
 
@@ -203,7 +195,6 @@ end
 -- callbacks have been stubbed out, and some others throw an error because
 -- there is no reason for them to be called during normal operation.
 function ufy.add_file_discovery_callbacks()
-  ufy.locate_config()
   callback.register('open_read_file',reader)
   callback.register('find_output_file',  return_asked_name)
   callback.register('find_write_file', return_asked_name_id)
@@ -285,5 +276,6 @@ function ufy.text_to_paragraph(text)
   return para_head
 end
 
+ufy.locate_config()
 
 return ufy
