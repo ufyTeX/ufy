@@ -72,7 +72,7 @@ function ufy.run(args)
   }
 
   local command = table.concat(command_args, " ")
-  print(command)
+  print(string.format("\n%s\n", command))
   local _, _, code = os.execute(command)
   os.exit(code)
 end
