@@ -3,6 +3,8 @@ local path = require("path")
 
 local ufy = {}
 ufy.fonts = require("ufy.fonts")
+ufy.loader = require("ufy.loader")
+
 
 local ufy_config_dir
 
@@ -27,11 +29,6 @@ function ufy.config_dir()
   return ufy_config_dir
 end
 
-local function file_exists(name)
-   local f=io.open(name,"r")
-   if f~=nil then io.close(f) return true else return false end
-end
-
 -- Run the ufy program.
 --
 -- Setup and invokes the LuaTeX interpreter with a Lua file.
@@ -42,7 +39,7 @@ function ufy.run(args)
 
   -- Check if LuaTeX binary exists
   print("Checking if luatex is present…")
-  if not file_exists(luatex_program) then
+  if not path.isfile(luatex_program) then
     print("Cannot find LuaTeX binary at " .. luatex_program)
     print("Run ufy --install-luatex to download and install LuaTeX for your platform.")
     os.exit(1)
@@ -74,154 +71,19 @@ function ufy.run(args)
   os.exit(code)
 end
 
--- Copied from: http://tex.stackexchange.com/questions/218855/using-lualatex-and-sqlite3/219228#219228
-local function make_loader(ppath, pos, loadfunc)
-  local default_loader = package.searchers[pos]
-  local loader = function(name)
-    local file, _ = package.searchpath(name,ppath)
-    if not file then
-      local msg = "\n\t[lualoader] Search failed"
-      local ret = default_loader(name)
-      if type(ret) == "string" then
-        return msg ..ret
-      elseif type(ret) == "nil" then
-        return msg
-      else
-        return ret
-      end
-    end
-    local loader,err = loadfunc(file, name)
-    if not loader then
-      return "\n\t[lualoader] Loading error:\n\t"..err
-    end
-    return loader
-  end
-  package.searchers[pos] = loader
-end
-
-local function binary_loader(file, name)
-  local symbol = name:gsub("%.","_")
-  return package.loadlib(file, "luaopen_"..symbol)
-end
-
--- Revert the package searchers to use package.path and package.cpath.
---
--- Package searching logic is overridden by default in LuaTeX to use kpse.
--- Calling this function reverts the searchers to use package.path and
--- package.cpath first, failing which it will try the kpse based searcher.
---
--- Package Loading References:
--- 1. http://www.lua.org/manual/5.2/manual.html#pdf-package.searchers
--- 2. LuaTeX Manual, Section 3.2, Lua behavior
-function ufy.switch_package_searchers()
-  make_loader(package.path,2,loadfile)
-  make_loader(package.cpath,3, binary_loader)
+function ufy.pre_init()
+  texconfig.kpse_init = false
+  texconfig.shell_escape = 't'
+  local fd= require("ufy.file_discovery")
+  fd.add_callbacks()
 end
 
 function ufy.init()
   tex.enableprimitives('',tex.extraprimitives())
-  ufy.switch_package_searchers()
+  ufy.loader.revert_package_searchers()
   tex.outputmode = 1
   pdf.mapfile(nil)
   pdf.mapline('')
-end
-
-
-local function reader( asked_name )
-  -- print("reader: "..asked_name)
-  local tab = { }
-  tab.file = io.open(asked_name,"rb")
-  if tab.file == nil then error("Could not read "..asked_name) end
-  tab.reader = function (t)
-                  local f = t.file
-                  return f:read('*l')
-               end
-  tab.close = function (t)
-                  t.file:close()
-              end
-  return tab
-end
-
-local function read_file( name )
-  -- print("read_file: "..name)
-  local f, err = io.open(name,"rb")
-  if f == nil then error(err) end
-  local buf = f:read("*all")
-  f:close()
-  return true,buf,buf:len()
-end
-
-local function return_asked_name( asked_name )
-  -- print("in return_asked_name: "..asked_name)
-  return asked_name
-end
-
-local function return_asked_name_id(_, asked_name)
-  -- print("in return_asked_name_id: "..asked_name)
-  return asked_name
-end
-
-local function error_xxx_file(name)
-  print("error_xxx_file: "..name)
-  print("ERROR: should not get here.")
-  return nil
-end
-
-local function find_format_file(name)
-  -- print("in find_format_file")
-  return path.join(ufy.config_dir(), name)
-end
-
-local function find_map_file(name)
-  -- print("find_map_file: "..name)
-  return path.join(ufy.config_dir(), name)
-end
-
-local function find_font_file(name)
-  -- print("find_font_file: "..name)
-  if file_exists(name) then
-    return name
-  else
-    return path.join(ufy.config_dir(), "fonts", name)
-  end
-end
-
--- Add file discovery callbacks that LuaTeX requires when kpse
--- is not initialized
---
--- ufy starts up by setting texconfig.kpse_init to false, which means
--- we need to implement the file discovery callbacks ourselves. However,
--- ufy does not need to implement all the file discovery callbacks. Some
--- callbacks have been stubbed out, and some others throw an error because
--- there is no reason for them to be called during normal operation.
-function ufy.add_file_discovery_callbacks()
-  callback.register('open_read_file',reader)
-  callback.register('find_output_file',  return_asked_name)
-  callback.register('find_write_file', return_asked_name_id)
-  callback.register('find_read_file', return_asked_name_id)
-
-  callback.register('find_format_file', find_format_file)
-
-  callback.register('find_map_file', find_map_file)
-  callback.register('read_map_file', read_file)
-  callback.register('find_font_file', find_font_file)
-  callback.register('read_font_file', read_file)
-
-  callback.register('find_opentype_file',find_font_file)
-  callback.register('find_type1_file',   find_font_file)
-  callback.register('find_truetype_file',find_font_file)
-
-  callback.register('read_opentype_file',read_file)
-  callback.register('read_type1_file',   read_file)
-  callback.register('read_truetype_file',read_file)
-
-  for _,t in ipairs({'find_vf_file','find_enc_file','find_sfd_file','find_pk_file','find_data_file','find_image_file'}) do
-    callback.register(t,error_xxx_file)
-  end
-
-  for _,t in ipairs({'read_vf_file','read_sdf_file','read_pk_file','read_data_file'}) do
-    callback.register(t, error_xxx_file )
-  end
 end
 
 -- build paragraph node

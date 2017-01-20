@@ -14,13 +14,16 @@ dependencies = {
   "luabidi >= 0.0.4",
   "compat53 >= 0.0.3",
   "datafile >=0.3",
+  "luafilesystem >=1.6.3",
   "lua-path >= 0.3.0"
 }
 build = {
    type = "builtin",
    modules = {
      ufy = "src/ufy/init.lua",
-     ['ufy.fonts'] = 'src/ufy/fonts.lua'
+     ['ufy.fonts'] = 'src/ufy/fonts.lua',
+     ['ufy.loader'] = 'src/ufy/loader.lua',
+     ['ufy.file_discovery'] = 'src/ufy/file_discovery.lua'
    },
    install = {
      bin = {
