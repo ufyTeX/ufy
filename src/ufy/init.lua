@@ -31,7 +31,7 @@ end
 
 -- Run the ufy program.
 --
--- Setup and invokes the LuaTeX interpreter with a Lua file.
+-- Setup and invoke the LuaTeX interpreter with a Lua file.
 function ufy.run(args)
   -- Location of standalone LuaTeX binary in a regular
   -- installation of ufy.
