@@ -17,5 +17,3 @@ local vbox = tex.linebreak(head, { hsize = tex.hsize })
 
 tex.box[666] = node.vpack(vbox)
 tex.shipout(666)
-
-
