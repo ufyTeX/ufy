@@ -1,4 +1,5 @@
 local utf8 = require("compat53.utf8")
+local path = require("path")
 
 local ufy = {}
 ufy.fonts = require("ufy.fonts")
@@ -53,12 +54,21 @@ function ufy.run(args)
   -- Locate pre-init file
   local pre_init_file = ufy_config_dir .. "/ufy_pre_init.lua"
 
+  -- Extract basename without extension for jobname
+  local jobname, _ = path.splitext(path.basename(args[1]))
+
   local command_args = {
     luatex_program,             -- LuaTeX binary
     "--shell-escape",           -- Allows io.popen in Lua init script: see http://tug.org/pipermail/luatex/2016-October/006249.html
     "--lua=" .. pre_init_file,  -- Pre-init file
-    "\\&ufy",                   -- format file
-    args[1]
+    "--jobname=" .. jobname,    -- Set jobname from filname
+    "--ini",                    -- IniTeX mode, no format file
+    -- minimal setup before running
+    "'\\catcode`\\{=1'",
+    "'\\catcode`\\}=2'",
+    "'\\directlua{ufy.init()}'",
+    string.format("'\\directlua{dofile(\"%s\")}'", args[1]),
+    "'\\end'"
   }
 
   local command = table.concat(command_args, " ")
@@ -68,10 +78,10 @@ function ufy.run(args)
 end
 
 -- Copied from: http://tex.stackexchange.com/questions/218855/using-lualatex-and-sqlite3/219228#219228
-local function make_loader(path, pos, loadfunc)
+local function make_loader(ppath, pos, loadfunc)
   local default_loader = package.searchers[pos]
   local loader = function(name)
-    local file, _ = package.searchpath(name,path)
+    local file, _ = package.searchpath(name,ppath)
     if not file then
       local msg = "\n\t[lualoader] Search failed"
       local ret = default_loader(name)
