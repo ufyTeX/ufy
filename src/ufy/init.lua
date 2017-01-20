@@ -28,6 +28,11 @@ function ufy.locate_config()
   end
 end
 
+-- Return ufy’s config directory
+function ufy.config_dir()
+  return ufy_config_dir
+end
+
 local function file_exists(name)
    local f=io.open(name,"r")
    if f~=nil then io.close(f) return true else return false end
@@ -125,12 +130,8 @@ function ufy.init()
   tex.enableprimitives('',tex.extraprimitives())
   ufy.switch_package_searchers()
   tex.outputmode = 1
-  pdf.setpkresolution(600)
-  pdf.setminorversion(5)
   pdf.mapfile(nil)
   pdf.mapline('')
-  local fontid = ufy.fonts.load_font(string.format("%s/fonts/%s", ufy_config_dir, "Merriweather-Light.ttf"), 10)
-  font.current(fontid)
 end
 
 
