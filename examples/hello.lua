@@ -15,6 +15,7 @@ local head = ufy.text_to_paragraph(text)
 -- Break the paragraph into vertically stacked boxes
 local vbox = tex.linebreak(head, { hsize = tex.hsize })
 
--- Write node to ‘current’ list
-node.write(vbox)
+tex.box[666] = node.vpack(vbox)
+tex.shipout(666)
+
 
