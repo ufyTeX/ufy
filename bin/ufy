@@ -1,4 +1,3 @@
 #!/usr/bin/env lua
 local ufy = require("ufy")
 ufy.run(arg)
--- $LUATEX_DIR/luatex --lua=$HOME/.ufy/ufy-config/ufy_pre_init.lua \&ufy $1
