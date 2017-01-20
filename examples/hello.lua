@@ -1,3 +1,5 @@
+local path = require('path')
+
 -- Page settings
 tex.pagewidth = "210mm"
 tex.pageheight = "297mm"
@@ -11,7 +13,7 @@ pdf.setpkresolution(600)
 pdf.setminorversion(5)
 
 -- Load Merriweather font, which is bundled with ufy
-local fontid = ufy.fonts.load_font(string.format("%s/fonts/%s", ufy.config_dir(), "Merriweather-Light.ttf"), 10)
+local fontid = ufy.fonts.load_font(path.join(ufy.config_dir(), "fonts" ,"Merriweather-Light.ttf"), 10)
 font.current(fontid)
 
 -- Convert text to nodes
