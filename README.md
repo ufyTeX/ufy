@@ -2,7 +2,7 @@
 
 _WARNING: This is pre-release code, and very much a work in progress. Lots of functionality is missing and existing functionality may have serious bugs_.
 
-_ufy is wrapper around the [LuaTeX](http://www.luatex.org/) typesetting engine. It exposes the core Lua API of LuaTeX in a clean and minimal way.
+_ufy_ is wrapper around the [LuaTeX](http://www.luatex.org/) typesetting engine. It exposes the core Lua API of LuaTeX in a clean and minimal way.
 
 * No need for an elaborate TeX installation like TeX Live, MikTeX etc. The only dependencies are – [Lua], [LuaRocks] and the [LuaTeX binary] for your platform.
 * No need to know the TeX macro language, which is a bit dated and can be very confusing for modern programmers. Write your typesetting code in pure Lua on top of the API that LuaTeX exposes (refer to the [LuaTeX user manual][manual]).
@@ -13,9 +13,6 @@ _ufy is wrapper around the [LuaTeX](http://www.luatex.org/) typesetting engine. 
 [LuaRocks]:https://luarocks.org/
 [luaharfbuzz]:https://github.com/deepakjois/luaharfbuzz
 [luabidi]:https://github.com/deepakjois/luabidi
-
-The _ufy_ API is built on top of the API that LuaTeX exposes (refer to the [LuaTeX user manual][manual]). The _ufy_ program uses the Lua interpreter embedded in LuaTeX to execute Lua code, but at the same time allows use of any Lua modules on the system – LuaRocks modules or other Lua modules exposed using LUA_PATH.
-
 [manual]:http://www.luatex.org/svn/trunk/manual/luatex.pdf
 
 ## Drawbacks
