@@ -43,7 +43,7 @@ function ufy.run(args)
   end
 
   -- Locate pre-init file
-  local pre_init_file = ufy.config_dir() .. "/ufy_pre_init.lua"
+  local pre_init_file = path.join(ufy.config_dir(), "ufy_pre_init.lua")
 
   -- Extract basename without extension for jobname
   local jobname, _ = path.splitext(path.basename(args[1]))
