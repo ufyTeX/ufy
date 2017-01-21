@@ -1,14 +1,11 @@
-local utf8 = require("compat53.utf8")
 local path = require("path")
 
 local ufy = {}
-ufy.fonts = require("ufy.fonts")
-ufy.loader = require("ufy.loader")
 
-
+-- Cache ufy’s config directory location.
 local ufy_config_dir
 
--- Locate ufy’s config directory
+-- Locate ufy’s config directory.
 function ufy.locate_config()
   local datafile = require("datafile")
   local luarocks_opener = require("datafile.openers.luarocks")
@@ -23,7 +20,7 @@ function ufy.locate_config()
   end
 end
 
--- Return ufy’s config directory
+-- Return ufy’s config directory.
 function ufy.config_dir()
   if ufy_config_dir == nil then ufy.locate_config() end
   return ufy_config_dir
@@ -80,62 +77,11 @@ end
 
 function ufy.init()
   tex.enableprimitives('',tex.extraprimitives())
-  ufy.loader.revert_package_searchers()
+  local loader = require("ufy.loader")
+  loader.revert_package_searchers()
   tex.outputmode = 1
   pdf.mapfile(nil)
   pdf.mapline('')
-end
-
--- build paragraph node
--- adapted from: http://tex.stackexchange.com/questions/114568/can-i-create-a-node-list-from-some-text-entirely-within-lua
-function ufy.text_to_paragraph(text)
-  local current_font = font.current()
-  local font_params = font.getfont(current_font).parameters
-
-  local para_head = node.new("local_par")
-  para_head.dir = "TLT"
-
-  local last = para_head
-
-  local indent = node.new("hlist",3)
-  indent.width = tex.parindent
-  last.next = indent
-  last = indent
-
-  for _,v in utf8.codes(text) do
-    local n
-    if v < 32 then
-      goto skipchar
-    elseif v == 32 then -- FIXME use Unicode properties to identify whitespace
-      n = node.new("glue",13)
-      node.setglue(n, font_params.space, font_params.space_shrink, font_params.space_stretch)
-    else
-      n = node.new("glyph", 1)
-      n.font = current_font
-      n.char = v
-      n.lang = tex.language
-      n.uchyph = 1
-      n.left = tex.lefthyphenmin
-      n.right = tex.righthyphenmin
-    end
-    last.next = n
-    last = n
-    ::skipchar::
-  end
-
-  -- now add the final parts: a penalty and the parfillskip glue
-  local penalty = node.new("penalty", 0)
-  penalty.penalty = 10000
-
-  local parfillskip = node.new("glue", 14)
-  parfillskip.stretch = 2^16
-  parfillskip.stretch_order = 2
-
-  last.next = penalty
-  penalty.next = parfillskip
-
-  node.slide(para_head)
-  return para_head
 end
 
 ufy.locate_config()

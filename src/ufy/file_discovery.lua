@@ -5,15 +5,19 @@ local file_discovery = {}
 local function reader( asked_name )
   -- print("reader: "..asked_name)
   local tab = { }
+
   tab.file = io.open(asked_name,"rb")
   if tab.file == nil then error("Could not read "..asked_name) end
+
   tab.reader = function (t)
-                  local f = t.file
-                  return f:read('*l')
-               end
+    local f = t.file
+    return f:read('*l')
+  end
+
   tab.close = function (t)
-                  t.file:close()
-              end
+    t.file:close()
+  end
+
   return tab
 end
 

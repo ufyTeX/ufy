@@ -10,9 +10,6 @@ description = {
 }
 dependencies = {
   "lua >= 5.2",
-  "luaharfbuzz >= 0.0.7",
-  "luabidi >= 0.0.4",
-  "compat53 >= 0.0.3",
   "datafile >=0.3",
   "luafilesystem >=1.6.3",
   "lua-path >= 0.3.0"
