@@ -16,7 +16,9 @@ _ufy_ is wrapper around the [LuaTeX](http://www.luatex.org/) typesetting engine.
 [manual]:http://www.luatex.org/svn/trunk/manual/luatex.pdf
 
 ## Drawbacks
-Using the LuaTeX API gives access to the low-level internals of the TeX engine, leaving the client to provide most of the higher level functionality. TeX distributions come bundled with macro files, fonts etc. that enable typesetting complex documents without doing a lot of additional work. With ufy, one will need to write Lua code to replicate all that functionality, or use a LuaRocks module that provides it. The idea is to let people contribute modules in Lua as rocks, and reuse them.
+Using the LuaTeX API gives access to the low-level internals of the TeX engine, leaving the client to provide most of the higher level functionality. TeX distributions come bundled with macro files, fonts etc. that enable typesetting complex documents without doing a lot of additional work. With ufy, one will need to write Lua code to replicate all that functionality, or use a LuaRocks module that provides it.
+
+The idea with _ufy_ is to let people contribute modules in Lua as rocks, and reuse them.
 
 ## Running
 
