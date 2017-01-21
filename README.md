@@ -44,7 +44,7 @@ chmod +x $HOME/.ufy/luatex
 
 ### Checkout and run ufy
 
-This install _ufy_ and make an executable binary available on PATH. If you encounter any problems, make sure you follow the instructions above to install and activate Lua in a sandbox, 
+This install _ufy_ and make an executable binary available on PATH. If you encounter any problems, make sure you follow the instructions above to install and activate Lua in a sandbox.
 
 ```
 git clone https://github.com/deepakjois/ufy
