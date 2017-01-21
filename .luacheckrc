@@ -9,6 +9,7 @@ files["."].globals = {
   "tex",
   "texio",
   "texconfig",
-  "ufy"
+  "ufy",
+  "unicode"
 }
 
