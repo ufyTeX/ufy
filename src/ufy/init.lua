@@ -54,7 +54,7 @@ function ufy.run(args)
     "--lua=" .. pre_init_file,  -- Pre-init file
     "--jobname=" .. jobname,    -- Set jobname from filname
     "--ini",                    -- IniTeX mode, no format file
-    -- minimal setup before running
+    -- minimal wrapper for executing a Lua file
     "'\\catcode`\\{=1'",
     "'\\catcode`\\}=2'",
     "'\\directlua{ufy.init()}'",
