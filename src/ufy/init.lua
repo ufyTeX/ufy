@@ -84,6 +84,9 @@ function ufy.init()
   pdf.mapline('')
 end
 
+function ufy.setup()
+end
+
 ufy.locate_config()
 
 return ufy
