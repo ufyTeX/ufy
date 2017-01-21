@@ -27,7 +27,6 @@ It is highly recommended that you install Lua 5.2 and LuaRocks in a sandboxed en
 
 ```
 wget https://raw.githubusercontent.com/mpeterv/hererocks/latest/hererocks.py
-
 hererocks lua52 -l5.2 -rlatest
 source lua52/bin/activate
 ```
