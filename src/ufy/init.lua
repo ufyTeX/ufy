@@ -5,6 +5,10 @@ local ufy = {}
 -- Cache ufy’s config directory location.
 local ufy_config_dir
 
+  -- Location of standalone LuaTeX binary in a regular
+  -- installation of ufy.
+local luatex_program = path.join(path.user_home(), ".ufy", "luatex")
+
 -- Locate ufy’s config directory.
 function ufy.locate_config()
   local datafile = require("datafile")
@@ -30,10 +34,6 @@ end
 --
 -- Setup and invoke the LuaTeX interpreter with a Lua file.
 function ufy.run(args)
-  -- Location of standalone LuaTeX binary in a regular
-  -- installation of ufy.
-  local luatex_program = path.join(path.user_home(), ".ufy", "luatex")
-
   -- Check if LuaTeX binary exists
   print("Checking if luatex is present…")
   if not path.isfile(luatex_program) then
@@ -85,6 +85,43 @@ function ufy.init()
 end
 
 function ufy.setup()
+  local cfg = require("luarocks.cfg")
+  local fs  = require("luarocks.fs")
+  local dir = path.dirname(luatex_program)
+  local _, err = fs.make_dir(dir)
+  if err ~= nil then
+    print(string.format("ERROR: could not create directory: %s.", dir))
+    os.exit(1)
+  end
+
+  if cfg.platforms.unix then
+    local url
+    if cfg.platforms.macosx then
+      -- Assume 64-bit Intel binary
+      url = "https://github.com/deepakjois/ufy/releases/download/luatex/luatex-osx-x86_64"
+    elseif cfg.platforms.linux then
+      if cfg.target_cpu == 'x86_64' then
+        url = "http://minimals.contextgarden.net/current/bin/luatex/linux-64/bin/luatex"
+      else
+        url = "http://minimals.contextgarden.net/current/bin/luatex/linux/bin/luatex"
+      end
+    else
+      print("ERROR: could not locate LuaTeX binaries for your platform.")
+      os.exit(1)
+    end
+    print(string.format("Downloading luatex binary into %s…", dir))
+    local ok
+    ok, err = fs.download(url,luatex_program, nil)
+    if not ok then
+      print("ERROR: downloading file: %s.", err)
+      os.exit(1)
+    end
+    ok = fs.chmod(luatex_program, "755")
+    if not ok then print("WARNING: could not make binary executable") end
+  elseif cfg.platforms.windows then
+    print("ERROR: support for installing LuaTeX Windows binaries is coming soon.")
+    os.exit(1)
+  end
 end
 
 ufy.locate_config()
