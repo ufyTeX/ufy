@@ -119,7 +119,8 @@ function ufy.setup()
     ok = fs.chmod(luatex_program, "755")
     if not ok then print("WARNING: could not make binary executable") end
   elseif cfg.platforms.windows then
-    print("ERROR: support for installing LuaTeX Windows binaries is coming soon.")
+    print("ERROR: Support for installing LuaTeX Windows binaries is not available yet.")
+    print(string.format("Please compile or find a copy of luatex and copy it to %s", dir))
     os.exit(1)
   end
 end
