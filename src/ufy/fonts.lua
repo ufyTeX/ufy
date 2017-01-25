@@ -14,6 +14,7 @@ function fonts.load_font(file, size)
      fullname = fonttable.fontname,
      type = "real",
      filename = file,
+     psname = fonttable.fontname,
      format = string.match(string.lower(file), "otf$") and "opentype" or string.match(string.lower(file), "ttf$") and "truetype",
      embedding = 'subset',
      size = size,
@@ -39,6 +40,10 @@ function fonts.load_font(file, size)
      quad = 1.0 * size,
      extra_space = 0
    }
+
+   -- Save backmap in TeX font, so we can get char code from glyph index
+   -- obtainded from Harfbuzz
+   metrics.backmap = fonttable.map.backmap
 
    metrics.characters = { }
    for char, glyph in pairs(fonttable.map.map) do
