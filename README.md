@@ -52,7 +52,7 @@ ufy --setup
 
 `ufy --setup` above will download and install the [LuaTeX binary] for your platform and copy it to `$HOME/.ufy/` (`%USERPROFILE%/.ufy` on Windows). 
 
-WARNING: _`ufy --setup` currently does not work for Windows, because the binaries are not available for download anywhere._
+WARNING: _`ufy --setup` currently does not work for Windows, because the binaries are not available for download anywhere. You will have to compile and install your own copy of the LuaTeX binary into `%USERPROFILE%\.ufy`_
 
 [LuaTeX binary]:http://www.luatex.org/download.html
 
