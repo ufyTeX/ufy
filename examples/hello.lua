@@ -1,4 +1,3 @@
-local path = require('path')
 local utf8 = require("compat53.utf8")
 local fonts = require("ufy.fonts")
 
@@ -26,12 +25,13 @@ local function text_to_paragraph(text)
   local font_params = font.getfont(current_font).parameters
 
   local para_head = node.new("local_par")
-  para_head.dir = "TLT"
+  para_head.dir = "TRT"
 
   local last = para_head
 
   local indent = node.new("hlist",3)
   indent.width = tex.parindent
+  indent.dir = "TRT"
   last.next = indent
   last = indent
 
