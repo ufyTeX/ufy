@@ -16,7 +16,7 @@ local function make_loader(ppath, pos, loadfunc)
         return ret
       end
     end
-    local ldr,err = loadfunc(file, name)
+    local ldr,err = loadfunc(file,name)
     if not ldr then
       return "\n\t[lualoader] Loading error:\n\t"..err
     end
@@ -40,7 +40,9 @@ end
 -- 1. http://www.lua.org/manual/5.2/manual.html#pdf-package.searchers
 -- 2. LuaTeX Manual, Section 3.2, Lua behavior
 function loader.revert_package_searchers()
-  make_loader(package.path,2,loadfile)
+  make_loader(package.path,2,function(file)
+    return loadfile(file)
+  end)
   make_loader(package.cpath,3, binary_loader)
 end
 
