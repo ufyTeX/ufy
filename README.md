@@ -6,8 +6,8 @@ _ufy_ is wrapper around the [LuaTeX](http://www.luatex.org/) typesetting engine.
 
 * No need for an elaborate TeX installation like TeX Live, MikTeX etc. The only dependencies are – [Lua], [LuaRocks] and the [LuaTeX binary] for your platform.
 * No need to know the TeX macro language, which is a bit dated and can be very confusing for modern programmers. Write your typesetting code in pure Lua on top of the API that LuaTeX exposes (refer to the [LuaTeX user manual][manual]).
-* No need to deal with legacy TeX based font related formats like .tfm, .pfb, .map etc. You can directly load TTF/OTF files.
-* Use or write LuaRocks modules for reusable and distributable code. For example, one could use [luaharfbuzz] and [luabidi] to shape text in non-latin scripts like Arabic or Devanagari before sending it to TeX for typesetting.
+* No need to deal with legacy TeX based font formats like .tfm, .pfb, .map etc. You can directly load TTF/OTF files.
+* Use or write LuaRocks modules for reusable and distributable code. For example, one could use [luaharfbuzz] and [luabidi] to shape text in non-latin scripts like Arabic or Devanagari before using the TeX engine for typesetting.
 
 [Lua]:https://www.lua.org
 [LuaRocks]:https://luarocks.org/
@@ -16,9 +16,7 @@ _ufy_ is wrapper around the [LuaTeX](http://www.luatex.org/) typesetting engine.
 [manual]:http://www.luatex.org/svn/trunk/manual/luatex.pdf
 
 ## Drawbacks
-Using the LuaTeX API gives access to the low-level internals of the TeX engine, leaving the client to provide most of the higher level functionality. TeX distributions come bundled with macro files, fonts etc. that enable typesetting complex documents without doing a lot of additional work. With ufy, one will need to write Lua code to replicate all that functionality, or use a LuaRocks module that provides it.
-
-The idea with _ufy_ is to let people contribute modules in Lua as rocks, and reuse them.
+Using the LuaTeX API gives access to low-level internals of the TeX engine, leaving the client to provide the higher level functionality. TeX distributions like MacTeX and MikTeX come bundled with macro files, fonts etc. that enable typesetting complex documents without doing a lot of additional work. With ufy, one wll need to write Lua code to replicate all that functionality, or use a LuaRocks module that already provides it.
 
 ## Running
 
@@ -43,7 +41,7 @@ chmod +x $HOME/.ufy/luatex
 
 ### Checkout and run ufy
 
-This install _ufy_ and make an executable binary available on PATH. If you encounter any problems, make sure you follow the instructions above to install and activate Lua in a sandbox.
+Install _ufy_ and make an executable binary available on PATH. If you encounter any problems, make sure you have followed the instructions above to install and activate Lua in a sandbox first.
 
 ```
 git clone https://github.com/deepakjois/ufy
