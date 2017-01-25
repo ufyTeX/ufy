@@ -77,8 +77,7 @@ end
 
 function ufy.init()
   tex.enableprimitives('',tex.extraprimitives())
-  local loader = require("ufy.loader")
-  loader.revert_package_searchers()
+  ufy.loader.revert_package_searchers()
   tex.outputmode = 1
   pdf.mapfile(nil)
   pdf.mapline('')
@@ -126,5 +125,5 @@ function ufy.setup()
 end
 
 ufy.locate_config()
-
+ufy.loader = require("ufy.loader")
 return ufy
