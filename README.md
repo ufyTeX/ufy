@@ -23,6 +23,8 @@ Using the LuaTeX API gives access to low-level internals of the TeX engine, leav
 ### Install Lua 5.2 and LuaRocks in a sandboxed environment
 It is highly recommended that you install Lua 5.2 and LuaRocks in a sandboxed environment on your machine. [Hererocks] makes it dead simple to do, on all platforms.
 
+[Hererocks]:https://github.com/mpeterv/hererocks
+
 ```
 wget https://raw.githubusercontent.com/mpeterv/hererocks/latest/hererocks.py
 hererocks lua52 -l5.2 -rlatest
