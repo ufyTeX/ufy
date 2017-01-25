@@ -14,8 +14,8 @@ tex.parindent = "20pt"
 pdf.setpkresolution(600)
 pdf.setminorversion(5)
 
--- Load Merriweather font, which is bundled with ufy
-local fontid = fonts.load_font(path.join(ufy.config_dir(), "fonts" ,"Merriweather-Light.ttf"), 10)
+-- Load Amiri font, which should be present in the same directory.
+local fontid = fonts.load_font("amiri-regular.ttf", 10)
 font.current(fontid)
 
 -- Build a simple paragraph node from given text. This code does not do any complex shaping etc.
