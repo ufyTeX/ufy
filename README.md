@@ -32,16 +32,14 @@ source lua52/bin/activate
 ```
 
 ### Download standalone LuaTeX binary
-Download the [LuaTeX binary] for your platform and copy it to `$HOME/.ufy/` (`%USERPROFILE%/.ufy` on Windows):
-
-[LuaTeX binary]:http://www.luatex.org/download.html
+Download the 
 
 ```
 wget -O $HOME/.ufy/luatex http://minimals.contextgarden.net/current/bin/luatex/osx-intel/bin/luatex
 chmod +x $HOME/.ufy/luatex
 ```
 
-### Checkout and run ufy
+### Checkout and setup ufy
 
 Install _ufy_ and make an executable binary available on PATH. If you encounter any problems, make sure you have followed the instructions above to install and activate Lua in a sandbox first.
 
@@ -49,7 +47,16 @@ Install _ufy_ and make an executable binary available on PATH. If you encounter 
 git clone https://github.com/deepakjois/ufy
 cd ufy
 luarocks make
+ufy --setup
 ```
+
+`ufy --setup` above will download and install the [LuaTeX binary] for your platform and copy it to `$HOME/.ufy/` (`%USERPROFILE%/.ufy` on Windows). 
+
+WARNING: _`ufy --setup` currently does not work for Windows, because the binaries are not available for download anywhere._
+
+[LuaTeX binary]:http://www.luatex.org/download.html
+
+### Run ufy
 
 Run an example file that generates a PDF:
 
