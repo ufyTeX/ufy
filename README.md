@@ -68,5 +68,5 @@ Transcript written on hello.log.
 
 ## References
 
-* [TeX by Topic](http://texdoc.net/texmf-dist/doc/plain/texbytopic/TeXbyTopic.pdf) (PDF) – Great reference to understand the internals of TeX.
+* [TeX by Topic](http://texdoc.net/texmf-dist/doc/plain/texbytopic/TeXbyTopic.pdf) (PDF) – Understand the internals of TeX.
 * [LuaTeX Reference](http://www.luatex.org/svn/trunk/manual/luatex.pdf) (PDF) – The definitive reference to the Lua API provided by LuaTeX.
