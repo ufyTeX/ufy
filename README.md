@@ -70,3 +70,4 @@ Transcript written on hello.log.
 
 * [TeX by Topic](http://texdoc.net/texmf-dist/doc/plain/texbytopic/TeXbyTopic.pdf) (PDF) – Understand the internals of TeX.
 * [LuaTeX Reference](http://www.luatex.org/svn/trunk/manual/luatex.pdf) (PDF) – The definitive reference to the Lua API provided by LuaTeX.
+* [Tex without TeX](http://wiki.luatex.org/index.php/TeX_without_TeX) – The information on this page may be a bit outdated, but it is a good reference to understand the basic concepts behind using LuaTeX without the TeX macro language.
