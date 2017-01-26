@@ -59,6 +59,12 @@ Run an example file that generates a PDF:
 $ cd examples
 
 $ ufy hello.lua
+Checking if luatex is present…
+
+/home/deepak/.ufy/luatex --shell-escape --lua=/home/deepak/lua52/lib/luarocks/rocks/ufy/scm-1/config/ufy_pre_init.lua --jobname=bidi --ini '\catcode`\{=1' '\catcode`\}=2' '\directlua{ufy.init()}' '\directlua{dofile("bidi.lua")}' '\end'
+
+This is LuaTeX, Version 1.0.0 (TeX Live 2017/dev)  (INITEX)
+ system commands enabled.
 …
 …<snip>…
 …
@@ -71,3 +77,8 @@ Transcript written on hello.log.
 * [TeX by Topic](http://texdoc.net/texmf-dist/doc/plain/texbytopic/TeXbyTopic.pdf) (PDF) – Understand the internals of TeX.
 * [LuaTeX Reference](http://www.luatex.org/svn/trunk/manual/luatex.pdf) (PDF) – The definitive reference to the Lua API provided by LuaTeX.
 * [Tex without TeX](http://wiki.luatex.org/index.php/TeX_without_TeX) – The information on this page may be a bit outdated, but it is a good reference to understand the basic concepts behind using LuaTeX without the TeX macro language.
+
+## Credits
+* [SILE](https://github.com/simoncozens/sile) – which originally sparked the idea.
+* [speedata Publisher](https://github.com/speedata/publisher) which already does this, but not in a general-purpose way.
+* People on [TeX.SX](http://tex.stackexchange.com/) and [LuaTeX mailing list](https://tug.org/mailman/listinfo/luatex) for all their assistance.
