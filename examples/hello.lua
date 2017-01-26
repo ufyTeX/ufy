@@ -1,4 +1,4 @@
-local utf8 = require("compat53.utf8")
+local utf8 = require("compat53.utf8") -- luarocks install compat53
 local fonts = require("ufy.fonts")
 
 -- Page settings

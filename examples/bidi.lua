@@ -1,7 +1,7 @@
-local bidi = require("bidi")
-local utf8 = require("compat53.utf8")
+local bidi = require("bidi")          -- luarocks install luabidi
+local utf8 = require("compat53.utf8") -- luarocks install compat53
 local fonts = require("ufy.fonts")
-local harfbuzz = require("harfbuzz")
+local harfbuzz = require("harfbuzz")  -- luarocks install luaharfbuzz
 
 local dbgtex = require("debugtex")
 
