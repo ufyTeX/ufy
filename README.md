@@ -39,7 +39,7 @@ eval $(luarocks path)
 
 ### Checkout and setup ufy
 
-Install _ufy_ and make an executable binary available on PATH. If you encounter any problems, make sure you have followed the instructions above to install and activate Lua in a sandbox first.
+The following commands install _ufy_ and make it available as an executable on PATH. If you encounter any problems, make sure you have followed the instructions above to install and activate Lua in a sandbox first. File an issue if the problems persist.
 
 ```
 git clone https://github.com/deepakjois/ufy
