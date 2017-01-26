@@ -19,9 +19,9 @@ _ufy_ is wrapper around the [LuaTeX](http://www.luatex.org/) typesetting engine.
 [manual]:http://www.luatex.org/svn/trunk/manual/luatex.pdf
 
 ### Drawbacks of using _ufy_
-Using the LuaTeX API gives access to low-level internals of the TeX engine. The client has to still provide the higher level functionality. TeX distributions like MacTeX and MikTeX come bundled with macro packages like LaTeX, fonts and other artefacts that do a lot of the heavy lifting in typesetting complex documents.
+Using the LuaTeX API only gives access to low-level internals of the TeX engine. The client has to still provide the higher level functionality. TeX distributions like MacTeX and MikTeX come bundled with macro packages like LaTeX, fonts and other artefacts that do a lot of the heavy lifting in typesetting complex documents.
 
-With _ufy_, you are pretty much on your own at the moment. _ufy_ invokes the LuaTeX binary with the `--ini` flag, so that is the environment you get dropped into when ufy starts. You could extend the capabilities of _ufy_ by writing and sharing LuaRocks modules for more complex typesetting tasks.
+With _ufy_, you are pretty much on your own at the moment. _ufy_ invokes the LuaTeX binary with the `--ini` flag, so that is the environment you get dropped into when ufy starts. You could extend the capabilities of _ufy_ by writing LuaRocks modules for more complex typesetting tasks. Please consider sharing them if they are of use generally.
 
 ## Running
 
@@ -39,7 +39,7 @@ eval $(luarocks path)
 
 ### Checkout and setup ufy
 
-The following commands install _ufy_ and make it available as an executable on PATH. If you encounter any problems, make sure you have followed the instructions above to install and activate Lua in a sandbox first. File an issue if the problems persist.
+The following commands install _ufy_ and make it available as an executable on PATH. If you encounter any problems, make sure you have followed the instructions above to install and activate Lua and LuaRocks in a sandbox first. File an issue if the problems persist.
 
 ```
 git clone https://github.com/deepakjois/ufy
