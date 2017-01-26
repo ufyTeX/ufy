@@ -2,13 +2,13 @@
 
 _WARNING: This is pre-release code, and very much a work in progress. Lots of functionality is missing and existing functionality may have serious bugs_.
 
-_ufy_ is wrapper around the [LuaTeX](http://www.luatex.org/) typesetting engine. It exposes the core Lua API of LuaTeX in a clean and minimal way. This API can be used to perform typesetting avoiding the use of the TeX macro language, using only Lua code.
+_ufy_ is wrapper around the [LuaTeX](http://www.luatex.org/) typesetting engine. It exposes the core Lua-based API of LuaTeX in a clean and minimal way. This API could be used to perform typesetting using only Lua, without needing to use the TeX macro language.
 
 ### Benefits of using _ufy_
-* No need to know the TeX macro language, which is a bit dated and can be very confusing for modern programmers. Write your typesetting code in pure Lua on top of the LuaTeX API (refer to the [LuaTeX user manual][manual]).
-* No need for an elaborate TeX installation like TeX Live, MikTeX etc to get up and running. The only dependencies are – [Lua], [LuaRocks] and the [LuaTeX binary] for your platform.
+* No need to know the TeX macro language, which can be very confusing for modern-day programmers. Write your typesetting code in pure Lua (refer to the [LuaTeX user manual][manual]).
+* No need for an elaborate TeX installation like TeX Live, MikTeX etc. to get up and running. The only dependencies are – [Lua], [LuaRocks] and the [LuaTeX binary] for your platform.
 * No need to deal with legacy TeX based font formats like .tfm, .pfb, .map files etc. You can directly load TTF/OTF files.
-* Use or write LuaRocks modules for reusable and distributable code. For example, one could use [luaharfbuzz] and [luabidi] to reorder and shape text (see [example][bidi-example]) in non-latin scripts like Arabic or Devanagari before using the TeX engine for typesetting.
+* Use or write LuaRocks modules for reusable and distributable code. For example, one could use [luaharfbuzz] and [luabidi] to reorder and shape text (see [example][bidi-example]) in non-latin scripts like Arabic before using the TeX engine for typesetting.
 
 [bidi-example]:https://github.com/deepakjois/ufy/blob/master/examples/bidi.lua
 [Lua]:https://www.lua.org
@@ -45,9 +45,9 @@ luarocks make
 ufy --setup
 ```
 
-Running `ufy --setup` as shown above will download the [LuaTeX binary] for your platform and copy it to `$HOME/.ufy/` (`%USERPROFILE%/.ufy` on Windows).
-
 WARNING: _`ufy --setup` currently does not work for Windows, because the binaries are not available for download anywhere. You will have to compile and install your own copy of the LuaTeX binary into `%USERPROFILE%\.ufy`_
+
+Running `ufy --setup` as shown above will download the [LuaTeX binary] for your platform and copy it to `$HOME/.ufy/` (`%USERPROFILE%/.ufy` on Windows).
 
 [LuaTeX binary]:http://www.luatex.org/download.html
 
