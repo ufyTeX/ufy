@@ -82,6 +82,6 @@ Transcript written on hello.log.
 * [Tex without TeX](http://wiki.luatex.org/index.php/TeX_without_TeX) – The information on this page may be a bit outdated, but it is a good reference to understand the basic concepts behind using LuaTeX without the TeX macro language.
 
 ## Credits
-* [SILE](https://github.com/simoncozens/sile) – which originally sparked the idea.
-* [speedata Publisher](https://github.com/speedata/publisher) which already does this, but not in a general-purpose way.
+* [SILE](https://github.com/simoncozens/sile), which originally sparked the idea.
+* [speedata Publisher](https://github.com/speedata/publisher), which already does something similar to _ufy_ , but not in an extensible, general-purpose way.
 * People on [TeX.SX](http://tex.stackexchange.com/) and [LuaTeX mailing list](https://tug.org/mailman/listinfo/luatex) for all their assistance.
