@@ -7,9 +7,10 @@ _ufy_ is wrapper around the [LuaTeX](http://www.luatex.org/) typesetting engine.
 ### Benefits of using _ufy_
 * You don’t need to know the TeX macro language, which can be very confusing for modern-day programmers. Write your typesetting code in pure Lua (refer to the [LuaTeX user manual][manual]).
 * You don’t need an elaborate TeX installation like TeX Live, MikTeX etc. to get up and running. The only dependencies are – [Lua], [LuaRocks] and the [LuaTeX binary] for your platform.
-* You don’t need to deal with legacy TeX based font formats like .tfm, .pfb, .map files etc. Basic loading of TTF/OTF files is supported by the `ufy.fonts` module.
+* You don’t need to deal with legacy TeX based font formats like .tfm, .pfb, .map files etc. Basic loading of TTF/OTF files is supported by the `ufy.fonts` module (see [example][hello-example]).
 * Use or write LuaRocks modules for reusable and distributable code. For example, one could use [luaharfbuzz] and [luabidi] to reorder and shape text (see [example][bidi-example]) in non-latin scripts like Arabic before using the TeX engine for typesetting.
 
+[hello-example]:https://github.com/deepakjois/ufy/blob/master/examples/hello.lua
 [bidi-example]:https://github.com/deepakjois/ufy/blob/master/examples/bidi.lua
 [Lua]:https://www.lua.org
 [LuaRocks]:https://luarocks.org/
