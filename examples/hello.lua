@@ -1,6 +1,22 @@
 local utf8 = require("compat53.utf8") -- luarocks install compat53
 local fonts = require("ufy.fonts")
 
+-- Tracing Settings
+-- tex.tracingassigns    = 1
+-- tex.tracingcommands   = 1
+-- tex.tracinggroups     = 1
+-- tex.tracingifs        = 1
+-- tex.tracinglostchars  = 1
+-- tex.tracingmacros     = 1
+-- tex.tracingnesting    = 1
+tex.tracingonline     = 1
+tex.tracingoutput     = 1
+tex.tracingpages      = 1
+tex.tracingparagraphs = 1
+-- tex.tracingrestores   = 1
+-- tex.tracingscantokens = 1
+tex.tracingstats      = 1
+
 -- Page settings
 tex.pagewidth = "210mm"
 tex.pageheight = "297mm"
@@ -71,11 +87,7 @@ local function text_to_paragraph(text)
   return para_head
 end
 
--- Convert text to nodes
-local f = io.open("lorem.txt", "rb")
-local text = f:read("*all")
-f:close()
-local head = text_to_paragraph(text)
+local head = text_to_paragraph("hello world")
 
 -- Break the paragraph into vertically stacked boxes
 local vbox = tex.linebreak(head, { hsize = tex.hsize })
