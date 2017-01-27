@@ -1,29 +1,15 @@
+-- load Plain TeX defaults
+dofile("plain.lua")
+
+
 local utf8 = require("compat53.utf8") -- luarocks install compat53
 local fonts = require("ufy.fonts")
 
--- Tracing Settings
--- tex.tracingassigns    = 1
--- tex.tracingcommands   = 1
--- tex.tracinggroups     = 1
--- tex.tracingifs        = 1
--- tex.tracinglostchars  = 1
--- tex.tracingmacros     = 1
--- tex.tracingnesting    = 1
-tex.tracingonline     = 1
-tex.tracingoutput     = 1
-tex.tracingpages      = 1
-tex.tracingparagraphs = 1
--- tex.tracingrestores   = 1
--- tex.tracingscantokens = 1
-tex.tracingstats      = 1
-
--- Page settings
+-- A4 Paper Size
 tex.pagewidth = "210mm"
 tex.pageheight = "297mm"
-tex.hsize = "210mm"
-
--- Set the paragraph indentation
-tex.parindent = "20pt"
+tex.hoffset = tex.sp("1in")
+tex.voffset = tex.sp("1in")
 
 -- PDF Related settings
 pdf.setpkresolution(600)
@@ -87,10 +73,14 @@ local function text_to_paragraph(text)
   return para_head
 end
 
-local head = text_to_paragraph("hello world")
+-- Read text file
+local f = io.open("lorem.txt", "rb")
+local content = f:read("*all")
+f:close()
+
+local head = text_to_paragraph(content)
 
 -- Break the paragraph into vertically stacked boxes
 local vbox = tex.linebreak(head, { hsize = tex.hsize })
 
-tex.box[666] = node.vpack(vbox)
-tex.shipout(666)
+node.write(vbox)
