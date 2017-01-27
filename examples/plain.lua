@@ -1,4 +1,4 @@
--- Set the internet TeX parameters to exactly match the values when
+-- Set the internal TeX parameters to exactly match the values when
 -- Plain TeX is loaded.
 --
 -- Refer to plain.tex: http://ctan.imsc.res.in/macros/plain/base/plain.tex
@@ -39,35 +39,13 @@ tex.delimitershortfall=tex.sp("5pt")
 tex.nulldelimiterspace=tex.sp("1.2pt")
 tex.scriptspace=tex.sp("0.5pt")
 tex.parindent=tex.sp("20pt")
-
--- Glue parameters
-local parskip = node.new('glue', 3)
-node.setglue(parskip, 0, 65536, 0, 0, 0)
-tex.parskip = parskip
-local abovedisplayskip = node.new('glue', 4)
-node.setglue(abovedisplayskip, 786432, 196608, 589824, 0, 0)
-tex.abovedisplayskip = abovedisplayskip
-local abovedisplayshortskip = node.new('glue', 6)
-node.setglue(abovedisplayshortskip, 0, 196608, 0, 0, 0)
-tex.abovedisplayshortskip = abovedisplayshortskip
-local belowdisplayskip = node.new('glue', 5)
-node.setglue(belowdisplayskip, 786432, 196608, 589824, 0, 0)
-tex.belowdisplayskip = belowdisplayskip
-local belowdisplayshortskip = node.new('glue', 7)
-node.setglue(belowdisplayshortskip, 458752, 196608, 262144, 0, 0)
-tex.belowdisplayshortskip = belowdisplayshortskip
-local topskip = node.new('glue', 10)
-node.setglue(topskip, 655360, 0, 0, 0, 0)
-tex.topskip = topskip
-local splittopskip = node.new('glue', 11)
-node.setglue(splittopskip, 655360, 0, 0, 0, 0)
-tex.splittopskip = splittopskip
-local parfillskip = node.new('glue', 15)
-node.setglue(parfillskip, 0, 65536, 0, 2, 0)
-tex.parfillskip = parfillskip
-local baselineskip = node.new('glue', 2)
-node.setglue(baselineskip, 786432, 0, 0, 0, 0)
-tex.baselineskip = baselineskip
-local lineskip = node.new('glue', 2)
-node.setglue(lineskip, 65536, 0, 0, 0, 0)
-tex.lineskip = lineskip
+tex.setglue('parskip', 0, 65536, 0, 0, 0)
+tex.setglue('abovedisplayskip', 786432, 196608, 589824, 0, 0)
+tex.setglue('abovedisplayshortskip', 0, 196608, 0, 0, 0)
+tex.setglue('belowdisplayskip', 786432, 196608, 589824, 0, 0)
+tex.setglue('belowdisplayshortskip', 458752, 196608, 262144, 0, 0)
+tex.setglue('topskip', 655360, 0, 0, 0, 0)
+tex.setglue('splittopskip', 655360, 0, 0, 0, 0)
+tex.setglue('parfillskip', 0, 65536, 0, 2, 0)
+tex.setglue('baselineskip', 786432, 0, 0, 0, 0)
+tex.setglue('lineskip', 65536, 0, 0, 0, 0)
