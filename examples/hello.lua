@@ -5,7 +5,7 @@ dofile("plain.lua")
 local utf8 = require("compat53.utf8") -- luarocks install compat53
 local fonts = require("ufy.fonts")
 
--- A4 Paper Size
+-- A4 Paper Size w/ 1in margins on left and top
 tex.pagewidth = "210mm"
 tex.pageheight = "297mm"
 tex.hoffset = tex.sp("1in")
