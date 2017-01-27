@@ -20,7 +20,7 @@ function fonts.load_font(file, size)
      format = string.match(string.lower(file), "otf$") and "opentype" or string.match(string.lower(file), "ttf$") and "truetype",
      embedding = 'subset',
      size = size,
-     designsize = fonttable.design_size*6553.6,
+     designsize = size,
      cidinfo = fonttable.cidinfo,
      units_per_em = fonttable.units_per_em
    }
