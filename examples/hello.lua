@@ -30,7 +30,7 @@ pdf.setpkresolution(600)
 pdf.setminorversion(5)
 
 -- Load Amiri font, which should be present in the same directory.
-local fontid = fonts.load_font("amiri-regular.ttf", 10)
+local fontid = fonts.load_font("amiri-regular.ttf", "10pt")
 font.current(fontid)
 
 -- Build a simple paragraph node from given text. This code does not do any complex shaping etc.

@@ -61,7 +61,7 @@ local function find_font_file(name)
   if path.isfile(name) then
     return name
   else
-    return path.join(ufy.config_dir(), "fonts", name)
+    return nil
   end
 end
 

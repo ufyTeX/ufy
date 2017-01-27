@@ -18,7 +18,7 @@ pdf.setpkresolution(600)
 pdf.setminorversion(5)
 
 -- Load Amiri font, which should be present in the same directory.
-local amiri_fontid = fonts.load_font("amiri-regular.ttf", 10)
+local amiri_fontid = fonts.load_font("amiri-regular.ttf", "10pt")
 font.current(amiri_fontid)
 local amiri = font.getfont(amiri_fontid)
 

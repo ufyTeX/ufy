@@ -1,7 +1,9 @@
 local fonts = {}
 
+-- Load font at a given size. Size can be specified as
+-- a TeX dimension, for e.g. 12pt
 function fonts.load_font(file, size)
-  size = tex.sp(string.format('%dpt',size))
+  size = tex.sp(size)
 
 
   -- Load file using fontloader.open
