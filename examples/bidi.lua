@@ -3,15 +3,15 @@ local utf8 = require("compat53.utf8") -- luarocks install compat53
 local fonts = require("ufy.fonts")
 local harfbuzz = require("harfbuzz")  -- luarocks install luaharfbuzz
 
+dofile("plain.lua")
+
 -- local dbgtex = require("debugtex")
 
--- Page settings
+-- A4 Paper Size w/ 1in margins on left and top
 tex.pagewidth = "210mm"
 tex.pageheight = "297mm"
-tex.hsize = "210mm"
-
--- Set the paragraph indentation
-tex.parindent = "20pt"
+tex.hoffset = tex.sp("1in")
+tex.voffset = tex.sp("1in")
 
 -- PDF Related settings
 pdf.setpkresolution(600)
