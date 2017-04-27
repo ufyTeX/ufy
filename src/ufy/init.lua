@@ -97,7 +97,7 @@ function ufy.setup()
     local url
     if cfg.platforms.macosx then
       -- Assume 64-bit Intel binary
-      url = "https://github.com/deepakjois/ufy/releases/download/luatex/luatex-osx-x86_64"
+      url = "https://github.com/deepakjois/ufy/releases/download/luatex-1.0/luatex-osx-x86_64"
     elseif cfg.platforms.linux then
       if cfg.target_cpu == 'x86_64' then
         url = "http://minimals.contextgarden.net/current/bin/luatex/linux-64/bin/luatex"
