@@ -112,7 +112,7 @@ function ufy.setup()
     local ok
     ok, err = fs.download(url,luatex_program, nil)
     if not ok then
-      print("ERROR: downloading file: %s.", err)
+      print(string.format("ERROR downloading file: %s", err))
       os.exit(1)
     end
     ok = fs.chmod(luatex_program, "755")
