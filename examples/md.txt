@@ -1,0 +1,7 @@
+This is a plain markdown paragraph.
+
+This is another plain markdown paragraph.
+
+The arguments to builder functions are generally tables. Key-value pairs are used to set attributes, and the other values are used as children or literal string content, as appropriate.
+
+The library will interpret values as the appropriate types, when possible. So, you can supply a single value instead of an array. And you can supply a string instead of an inline node, or a node instead of a list item. The following is equivalent to the example above:
