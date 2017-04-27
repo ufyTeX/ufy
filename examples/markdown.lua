@@ -61,6 +61,11 @@ for cur, entering, node_type in cmark.walk(doc) do
     local vbox = tex.linebreak(para_head, { hsize = tex.hsize })
 
     node.write(vbox)
+
+    local skip = node.new("glue", 2)
+    node.setglue(skip, tex.baselineskip.width)
+
+    node.write(skip)
   elseif entering and node_type == cmark.NODE_TEXT then
     print("process paragraph text")
     local text = cmark.node_get_literal(cur)
