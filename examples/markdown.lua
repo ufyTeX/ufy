@@ -62,7 +62,9 @@ for cur, entering, node_type in cmark.walk(doc) do
 
     node.write(vbox)
 
-    local skip = node.new("glue", 2)
+    local skip = node.new("glue", 1)
+    print("vbox depth ", vbox.depth)
+    print("baseline skip width ", tex.baselineskip.width)
     node.setglue(skip, tex.baselineskip.width)
 
     node.write(skip)
