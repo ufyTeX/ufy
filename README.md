@@ -46,7 +46,7 @@ luarocks install ufy
 ufy --setup
 ```
 
-#### Checkout and setup ufy
+#### From source code
 
 The following commands install _ufy_ and make it available as an executable on PATH. If you encounter any problems, make sure you have followed the instructions above to install and activate Lua and LuaRocks in a sandbox first. File an issue if the problems persist.
 
