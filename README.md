@@ -37,7 +37,16 @@ source lua52/bin/activate
 eval $(luarocks path)
 ```
 
-### Checkout and setup ufy
+## Install ufy
+
+#### From LuaRocks
+
+```
+luarocks install ufy
+ufy --setup
+```
+
+#### Checkout and setup ufy
 
 The following commands install _ufy_ and make it available as an executable on PATH. If you encounter any problems, make sure you have followed the instructions above to install and activate Lua and LuaRocks in a sandbox first. File an issue if the problems persist.
 
