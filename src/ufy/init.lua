@@ -77,7 +77,7 @@ end
 
 function ufy.init()
   tex.enableprimitives('',tex.extraprimitives())
-  ufy.loader.revert_package_searchers()
+  ufy.loader.add_lua_searchers()
   tex.outputmode = 1
   pdf.mapfile(nil)
   pdf.mapline('')
