@@ -61,10 +61,7 @@ function ufy.run(args)
 end
 
 function ufy.pre_init()
-  texconfig.kpse_init = false
   texconfig.shell_escape = 't'
-  local fd= require("ufy.file_discovery")
-  fd.add_callbacks()
 end
 
 function ufy.init()

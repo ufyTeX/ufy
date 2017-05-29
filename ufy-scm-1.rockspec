@@ -19,8 +19,7 @@ build = {
    modules = {
      ufy = "src/ufy/init.lua",
      ['ufy.fonts'] = 'src/ufy/fonts.lua',
-     ['ufy.loader'] = 'src/ufy/loader.lua',
-     ['ufy.file_discovery'] = 'src/ufy/file_discovery.lua'
+     ['ufy.loader'] = 'src/ufy/loader.lua'
    },
    install = {
      bin = {
