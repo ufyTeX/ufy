@@ -19,7 +19,7 @@ pdf.setminorversion(5)
 -- Assumes Arabic RTL text, for simplicity.
 local function text_to_shaped_bidi_paragraph(text)
   -- Load Amiri font, which should be present in the same directory.
-  local amiri_fontid = fonts.load_font("amiri-regular.ttf", "10pt")
+  local amiri_fontid = fonts.load_font("./amiri-regular.ttf", "10pt")
 
   -- Set the Harfbuzz flag on the font
   local f = font.getfont(amiri_fontid)

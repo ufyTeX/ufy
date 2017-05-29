@@ -25,7 +25,7 @@ for cur, entering, node_type in cmark.walk(doc) do
     pdf.setminorversion(5)
 
     -- Load Amiri font, which should be present in the same directory.
-    local fontid = fonts.load_font("amiri-regular.ttf", "10pt")
+    local fontid = fonts.load_font("./amiri-regular.ttf", "10pt")
     font.current(fontid)
   elseif not entering and node_type == cmark.NODE_DOCUMENT then
     print("finish processing document")
