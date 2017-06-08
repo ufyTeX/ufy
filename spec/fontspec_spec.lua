@@ -18,9 +18,9 @@ test_cases = {
   t("[lmroman10-regular]",                       {filename = "lmroman10-regular"}),
   t("[abc.ttc:1]",                               {filename = "abc.ttc", fontindex = "1"}),
   t("Liberation Serif",                          {fontname = "Liberation Serif"}),
-  t("Liberation Serif /B",                       {fontname = "Liberation Serif", bold = true}),
-  t("Liberation Serif /BI",                      {fontname = "Liberation Serif", bolditalic = true}),
-  t("Liberation Serif /U",                       nil),
+  t("Liberation Serif /B",                       {fontname = "Liberation Serif", options = {bold = true}}),
+  t("Liberation Serif /BI /GR",                  {fontname = "Liberation Serif", options = {bolditalic = true, graphite = true}}),
+  t("Liberation Serif /U",                       {fontname = "Liberation Serif"}), -- ignore unknown options
   t("[abc.ttf]:+smcp",                           {filename = "abc.ttf", features = {smcp = true}}),
   t("Liberation Serif:+smcp",                    {fontname = "Liberation Serif", features = {smcp = true}}),
   t("[abc.ttf]:+smcp,+aalt=1",                   {filename = "abc.ttf", features = {smcp = true, aalt = "1"}}),

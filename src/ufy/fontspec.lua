@@ -37,18 +37,23 @@ local function merge_features(...)
   return {features = t}
 end
 
-local function trim_spaces(t)
-  for k,v in pairs(t) do
-    t[k] = string.gsub(v, "^%s*(.-)%s*$", "%1")
+local function process_options(...)
+  local opts = {...}
+  local res = {}
+
+  for i = 1,#opts do
+    local o = string.upper(opts[i])
+    if o == "BI" or i == "IB" then res.bolditalic = true
+    elseif o == "I" then res.italic = true
+    elseif o == "B" then res.bold = true
+    elseif o == "OT" then res.opentype = true
+    elseif o == "AAT" then res.aat = true
+    elseif o == "GR" then res.graphite = true
+    elseif o == "ICU" then res.icu = true
+    end
   end
-  return t
-end
-
-local function process_options(t)
-  if t.option == "BI" or t.option == "IB" then return {bolditalic = true} end
-  if t.option == "B" then return {bold = true} end
-  if t.option == "I" then return {italic = true} end
-
+  if next(res) == nil then return nil end
+  return res
 end
 
 -- font spec string parser
@@ -58,12 +63,16 @@ local filename = l.P"[" *
                  (l.P":" * l.Cg(l.digit^1, "fontindex"))^-1 *
                  l.P"]"
 
+local option = l.P"/" * l.C(l.alpha^1)
+
+local options = (option * (l.space^0 * option)^0) / process_options
+
 local fontname = l.Cg(l.Cmt((1 - l.P"[") * (1 - l.S":/") ^ 0, function(_,_,name)
   -- trim spaces
   return true, string.gsub(name, "^%s*(.-)%s*$", "%1")
-end),"fontname")
+end),"fontname") * l.Cg(options,"options")^-1
 
-local identifier = l.Ct(filename + fontname) 
+local identifier = l.Ct(filename + fontname)
 
 local feature = l.Ct(
                   l.space^0 *
@@ -74,9 +83,7 @@ local feature = l.Ct(
 
 local features = (feature * (l.P","^1 * feature)^0) / merge_features
 
-local options = l.Ct(l.P"/" * l.Cg(l.P"BI" + l.P"B" + l.P"IB" + l.P"I", "option") * l.space^0) / process_options
-
-local font_spec = (identifier * options^-1 * (l.P":" * features)^-1) * -1 / merge_tables
+local font_spec = (identifier  * (l.P":" * features)^-1) * -1 / merge_tables
 
 local fontspec = {}
 
