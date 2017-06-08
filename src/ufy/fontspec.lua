@@ -58,9 +58,12 @@ local filename = l.P"[" *
                  (l.P":" * l.Cg(l.digit^1, "fontindex"))^-1 *
                  l.P"]"
 
-local fontname = l.Cg((1 - l.P"[") * (1 - l.S":/") ^ 0, "fontname")
+local fontname = l.Cg(l.Cmt((1 - l.P"[") * (1 - l.S":/") ^ 0, function(_,_,name)
+  -- trim spaces
+  return true, string.gsub(name, "^%s*(.-)%s*$", "%1")
+end),"fontname")
 
-local identifier = l.Ct(filename + fontname) / trim_spaces
+local identifier = l.Ct(filename + fontname) 
 
 local feature = l.Ct(
                   l.space^0 *
