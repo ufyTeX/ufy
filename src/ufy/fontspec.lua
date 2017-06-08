@@ -44,6 +44,13 @@ local function trim_spaces(t)
   return t
 end
 
+local function process_options(t)
+  if t.option == "BI" or t.option == "IB" then return {bolditalic = true} end
+  if t.option == "B" then return {bold = true} end
+  if t.option == "I" then return {italic = true} end
+
+end
+
 -- font spec string parser
 
 local filename = l.P"[" *
@@ -64,7 +71,7 @@ local feature = l.Ct(
 
 local features = (feature * (l.P","^1 * feature)^0) / merge_features
 
-local options = l.P"/" * (l.P"BI" + l.P"B" + l.P"IB" + l.P"I") * l.space^0
+local options = l.Ct(l.P"/" * l.Cg(l.P"BI" + l.P"B" + l.P"IB" + l.P"I", "option") * l.space^0) / process_options
 
 local font_spec = (identifier * options^-1 * (l.P":" * features)^-1) * -1 / merge_tables
 
