@@ -37,6 +37,13 @@ local function merge_features(...)
   return {features = t}
 end
 
+local function trim_spaces(t)
+  for k,v in pairs(t) do
+    t[k] = string.gsub(v, "^%s*(.-)%s*$", "%1")
+  end
+  return t
+end
+
 -- font spec string parser
 
 local filename = l.P"[" *
@@ -44,9 +51,9 @@ local filename = l.P"[" *
                  (l.P":" * l.Cg(l.digit^1, "fontindex"))^-1 *
                  l.P"]"
 
-local fontname = l.Cg((1 - l.P"[") * (1 - l.P":") ^ 0, "fontname")
+local fontname = l.Cg((1 - l.P"[") * (1 - l.S":/") ^ 0, "fontname")
 
-local identifier = l.Ct(filename + fontname)
+local identifier = l.Ct(filename + fontname) / trim_spaces
 
 local feature = l.Ct(
                   l.space^0 *
@@ -57,7 +64,9 @@ local feature = l.Ct(
 
 local features = (feature * (l.P","^1 * feature)^0) / merge_features
 
-local font_spec = (identifier * (l.P":" * features)^-1) / merge_tables
+local options = l.P"/" * (l.P"BI" + l.P"B" + l.P"IB" + l.P"I") * l.space^0
+
+local font_spec = (identifier * options^-1 * (l.P":" * features)^-1) * -1 / merge_tables
 
 local fontspec = {}
 
