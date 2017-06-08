@@ -16,7 +16,7 @@ end
 
 test_cases = {
   t("[lmroman10-regular]", {filename = "lmroman10-regular"}),
-  -- t("[abc.ttc:1]", {filename = "abc.ttc", fontindex = 1}), -- FIXME
+  t("[abc.ttc:1]", {filename = "abc.ttc", fontindex = "1"}),
   t("Liberation Serif", {fontname = "Liberation Serif"}),
   t("[abc.ttf]:+smcp", {filename = "abc.ttf", features = {smcp = true}}),
   t("Liberation Serif:+smcp", {fontname = "Liberation Serif", features = {smcp = true}}),

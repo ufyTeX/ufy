@@ -39,7 +39,10 @@ end
 
 -- font spec string parser
 
-local filename = l.P"[" * l.Cg((1 - l.P"]") ^ 0, "filename") * l.P"]"
+local filename = l.P"[" *
+                 l.Cg((1 - l.S":]")^1, "filename") *
+                 (l.P":" * l.Cg(l.digit^1, "fontindex"))^-1 *
+                 l.P"]"
 
 local fontname = l.Cg((1 - l.P"[") * (1 - l.P":") ^ 0, "fontname")
 
