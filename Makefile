@@ -1,4 +1,7 @@
 lint:
-	luacheck src examples
+	luacheck src examples spec
 
-.PHONY: lint
+spec:
+	busted .
+
+.PHONY: lint spec
