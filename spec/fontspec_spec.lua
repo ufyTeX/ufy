@@ -25,5 +25,7 @@ test_cases = {
   t("Liberation Serif:+smcp",                    {fontname = "Liberation Serif", features = {smcp = true}}),
   t("[abc.ttf]:+smcp,+aalt=1",                   {filename = "abc.ttf", features = {smcp = true, aalt = "1"}}),
   t("[abc.ttf]:-smcp, +aalt=1",                  {filename = "abc.ttf", features = {smcp = false, aalt = "1"}}),
-  t("[abc.ttf]:script=arab, lang=urd",           {filename = "abc.ttf", features = {script = "arab", lang = "urd"}})
+  t("[abc.ttf]:script=arab, lang=urd",           {filename = "abc.ttf", features = {script = "arab", lang = "urd"}}),
+  t("[abc.ttf:script=arab, lang=urd",            nil),
+  t("[abc.ttf:script%arab, lang=urd",            nil)
 }
