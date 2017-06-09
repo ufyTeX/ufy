@@ -3,11 +3,11 @@ local fs = require("ufy.fontspec")
 local test_cases = {}
 
 describe("fontspec", function()
-  it("can parse font spec strings", function()
     for _,case in ipairs(test_cases) do
+      it(string.format("can parse '%s'", case.spec), function()
       assert.are.same(fs.parse(case.spec), case.result, string.format("Parsing string ‘%s’ failed", case.spec))
+    end)
     end
-  end)
 end)
 
 local function t(spec, result)
@@ -21,7 +21,7 @@ test_cases = {
   t("Liberation Serif /B",             {fontname = "Liberation Serif", options = {bold = true}}),
   t("Liberation Serif /BI/GR",         {fontname = "Liberation Serif", options = {bolditalic = true, graphite = true}}),
   t("Liberation Serif /U:+smcp",       {fontname = "Liberation Serif", features = {smcp = true}}), -- ignore unknown options
-  t("Liberation Serif /S=23",          nil), -- FIXME currently not supported
+  t("Liberation Serif /S=23",          {fontname = "Liberation Serif", options = {opticalsize = '23'}}),
   t("[abc.ttf]:+smcp",                 {filename = "abc.ttf", features = {smcp = true}}),
   t("Liberation Serif:+smcp",          {fontname = "Liberation Serif", features = {smcp = true}}),
   t("[abc.ttf]:+smcp,+aalt=1",         {filename = "abc.ttf", features = {smcp = true, aalt = "1"}}),

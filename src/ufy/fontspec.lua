@@ -37,19 +37,22 @@ local function merge_features(...)
   return {features = t}
 end
 
-local function process_options(...)
-  local opts = {...}
+local function process_options(opts)
   local res = {}
 
   for i = 1,#opts do
-    local o = string.upper(opts[i])
-    if o == "BI" or i == "IB" then res.bolditalic = true
-    elseif o == "I" then res.italic = true
-    elseif o == "B" then res.bold = true
-    elseif o == "OT" then res.opentype = true
-    elseif o == "AAT" then res.aat = true
-    elseif o == "GR" then res.graphite = true
-    elseif o == "ICU" then res.icu = true
+    if type(opts[i]) == 'table' then
+      if opts[i].name == 'S' then res.opticalsize = opts[i].val end
+    else
+      local o = string.upper(opts[i])
+      if o == "BI" or i == "IB" then res.bolditalic = true
+      elseif o == "I" then res.italic = true
+      elseif o == "B" then res.bold = true
+      elseif o == "OT" then res.opentype = true
+      elseif o == "AAT" then res.aat = true
+      elseif o == "GR" then res.graphite = true
+      elseif o == "ICU" then res.icu = true
+      end
     end
   end
   if next(res) == nil then return nil end
@@ -58,14 +61,16 @@ end
 
 -- font spec string parser
 
+local space = l.space^0
+
 local filename = l.P"[" *
                  l.Cg((1 - l.S":]")^1, "filename") *
                  (l.P":" * l.Cg(l.digit^1, "fontindex"))^-1 *
                  l.P"]"
-
-local option = l.P"/" * l.C(l.alpha^1)
-
-local options = (option * (l.space^0 * option)^0) / process_options
+local alpha_opt = l.C(l.alpha^1)
+local value_opt = l.Ct(l.Cg(l.alpha^1, "name") * l.P"=" * l.Cg(l.digit^1, "val"))
+local option = l.P"/" * (value_opt + alpha_opt)
+local options = l.Ct(option * (space * option)^0) / process_options
 
 local fontname = l.Cg(l.Cmt((1 - l.P"[") * (1 - l.S":/") ^ 0, function(_,_,name)
   -- trim spaces
@@ -75,7 +80,7 @@ end),"fontname") * l.Cg(options,"options")^-1
 local identifier = l.Ct(filename + fontname)
 
 local feature = l.Ct(
-                  l.space^0 *
+                  space *
                   l.Cg(l.S"+-"^-1, "onoff") *
                   l.Cg(l.alpha^1, "name") *
                   (l.P"=" * l.Cg((1-l.P",")^1, "val"))^-1
