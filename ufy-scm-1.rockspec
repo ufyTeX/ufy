@@ -1,11 +1,11 @@
 package = "ufy"
 version = "scm-1"
 source = {
-   url = "git+https://github.com/deepakjois/ufy.git"
+   url = "git+https://github.com/ufytex/ufy.git"
 }
 description = {
    summary = "Work in Progress",
-   homepage = "https://github.com/deepakjois/ufy",
+   homepage = "https://github.com/ufytex/ufy",
    license = "MIT"
 }
 dependencies = {
